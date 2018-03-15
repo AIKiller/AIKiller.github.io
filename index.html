@@ -22,7 +22,7 @@
     <link rel="alternative" href="/atom.xml" title="Killer的博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/assets/img/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -34,6 +34,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?a30844fa2bcbce0a9e001fe06cefeddf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 
@@ -45,11 +55,11 @@
 <div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+		<a href="" class="profilepic">
+			<img src="/img/killer.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Litten</a></h1>
+		  <h1 class="header-author"><a href="">Litten</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">乐观，悲观；开朗，阴沉。</p>
@@ -71,8 +81,6 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -82,13 +90,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
 		        
 			</div>
 		</nav>
@@ -106,7 +108,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/img/killer.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Litten</h1>
@@ -125,13 +127,7 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
 			        
 				</div>
 			</nav>
@@ -459,6 +455,100 @@
 
 
   
+    <article id="post-将frpc注册为windows服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/将frpc注册为windows服务/">注册frpc为windows服务</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/将frpc注册为windows服务/" class="archive-article-date">
+  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此方法使用<a href="https://nssm.cc/release/nssm-2.24.zip" target="_blank" rel="noopener">nssm(稳定版本)</a>工具将.EXE文件注册为Windows服务</p>
+<h3 id="1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"><a href="#1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）" class="headerlink" title="1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"></a>1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）</h3><p>使用cmd进入工具路径后可键入nssm查看工具使用参数，或直接双击查看工具使用参数。</p>
+<h3 id="2-在cmd中键入命令，进入服务编辑页面："><a href="#2-在cmd中键入命令，进入服务编辑页面：" class="headerlink" title="2. 在cmd中键入命令，进入服务编辑页面："></a>2. 在cmd中键入命令，进入服务编辑页面：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName</span><br></pre></td></tr></table></figure>
+<h3 id="3-设置服务路径地址"><a href="#3-设置服务路径地址" class="headerlink" title="3. 设置服务路径地址"></a>3. 设置服务路径地址</h3><p>如下所示点击Path，为需要注册为服务的应用选择所在路径。Starup directory将自动生成。</p>
+<p><img src="https://nssm.cc/images/install_application.png" alt=""></p>
+<blockquote>
+<p>注：图中所示的Arguments参数请不要设置否则会造成服务开启失败。</p>
+</blockquote>
+<h3 id="4-设置详details"><a href="#4-设置详details" class="headerlink" title="4.设置详details"></a>4.设置详details</h3><p>设置服务的描述信息</p>
+<p><img src="https://nssm.cc/images/install_details.png" alt=""></p>
+<h3 id="5-设置log-on"><a href="#5-设置log-on" class="headerlink" title="5.设置log on"></a>5.设置log on</h3><p>勾选Allow service to interact with desktop选项</p>
+<p><img src="https://nssm.cc/images/install_logon.png" alt=""></p>
+<h3 id="5-设置I-O选项卡"><a href="#5-设置I-O选项卡" class="headerlink" title="5.设置I / O选项卡"></a>5.设置I / O选项卡</h3><p>在frpc文件夹下创建日志输出文件，并选择。</p>
+<p><img src="https://nssm.cc/images/install_io.png" alt=""></p>
+<h2 id="其他选项卡信息使用默认设置即可。"><a href="#其他选项卡信息使用默认设置即可。" class="headerlink" title="其他选项卡信息使用默认设置即可。"></a>其他选项卡信息使用默认设置即可。</h2><hr>
+<h2 id="nssm-常用命令"><a href="#nssm-常用命令" class="headerlink" title="nssm 常用命令"></a>nssm 常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName 	<span class="comment">#安装服务</span></span><br><span class="line">nssm edit serviceName 		<span class="comment">#使用GUI编辑已安装的服务</span></span><br><span class="line">nssm restart serviceName 	<span class="comment">#重新启动服务</span></span><br><span class="line">nssm remove serviceName 	<span class="comment">#删除已安装的服务</span></span><br></pre></td></tr></table></figure>
+<p>文章参考至<a href="https://nssm.cc/usage" target="_blank" rel="noopener">nssm官方文档</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">frpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">windows服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/将frpc注册为windows服务/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-使用pentaho+sqoop进行数据更新的实施方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -565,100 +655,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/15/使用pentaho+sqoop进行数据更新的实施方案/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-将frpc注册为windows服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/15/将frpc注册为windows服务/">注册frpc为windows服务</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/15/将frpc注册为windows服务/" class="archive-article-date">
-  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此方法使用<a href="https://nssm.cc/release/nssm-2.24.zip" target="_blank" rel="noopener">nssm(稳定版本)</a>工具将.EXE文件注册为Windows服务</p>
-<h3 id="1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"><a href="#1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）" class="headerlink" title="1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"></a>1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）</h3><p>使用cmd进入工具路径后可键入nssm查看工具使用参数，或直接双击查看工具使用参数。</p>
-<h3 id="2-在cmd中键入命令，进入服务编辑页面："><a href="#2-在cmd中键入命令，进入服务编辑页面：" class="headerlink" title="2. 在cmd中键入命令，进入服务编辑页面："></a>2. 在cmd中键入命令，进入服务编辑页面：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName</span><br></pre></td></tr></table></figure>
-<h3 id="3-设置服务路径地址"><a href="#3-设置服务路径地址" class="headerlink" title="3. 设置服务路径地址"></a>3. 设置服务路径地址</h3><p>如下所示点击Path，为需要注册为服务的应用选择所在路径。Starup directory将自动生成。</p>
-<p><img src="https://nssm.cc/images/install_application.png" alt=""></p>
-<blockquote>
-<p>注：图中所示的Arguments参数请不要设置否则会造成服务开启失败。</p>
-</blockquote>
-<h3 id="4-设置详details"><a href="#4-设置详details" class="headerlink" title="4.设置详details"></a>4.设置详details</h3><p>设置服务的描述信息</p>
-<p><img src="https://nssm.cc/images/install_details.png" alt=""></p>
-<h3 id="5-设置log-on"><a href="#5-设置log-on" class="headerlink" title="5.设置log on"></a>5.设置log on</h3><p>勾选Allow service to interact with desktop选项</p>
-<p><img src="https://nssm.cc/images/install_logon.png" alt=""></p>
-<h3 id="5-设置I-O选项卡"><a href="#5-设置I-O选项卡" class="headerlink" title="5.设置I / O选项卡"></a>5.设置I / O选项卡</h3><p>在frpc文件夹下创建日志输出文件，并选择。</p>
-<p><img src="https://nssm.cc/images/install_io.png" alt=""></p>
-<h2 id="其他选项卡信息使用默认设置即可。"><a href="#其他选项卡信息使用默认设置即可。" class="headerlink" title="其他选项卡信息使用默认设置即可。"></a>其他选项卡信息使用默认设置即可。</h2><hr>
-<h2 id="nssm-常用命令"><a href="#nssm-常用命令" class="headerlink" title="nssm 常用命令"></a>nssm 常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName 	<span class="comment">#安装服务</span></span><br><span class="line">nssm edit serviceName 		<span class="comment">#使用GUI编辑已安装的服务</span></span><br><span class="line">nssm restart serviceName 	<span class="comment">#重新启动服务</span></span><br><span class="line">nssm remove serviceName 	<span class="comment">#删除已安装的服务</span></span><br></pre></td></tr></table></figure>
-<p>文章参考至<a href="https://nssm.cc/usage" target="_blank" rel="noopener">nssm官方文档</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">frpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">windows服务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/15/将frpc注册为windows服务/">展开全文 >></a>
         </p>
       
 
@@ -911,7 +907,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -935,8 +931,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -948,15 +942,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -1009,6 +1001,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hadopp</a>
               </li>
              
@@ -1018,14 +1018,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1072,43 +1064,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Litten，&lt;br&gt;热爱大海与冷笑话，&lt;br/&gt;目前是一枚前端&lt;br/&gt;&lt;br/&gt;胆小认生，不易相处，&lt;br&gt;年轻无为，卖马为生。</div>
   	  	
     	</section>
     
