@@ -76,8 +76,6 @@ var _hmt = _hmt || [];
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -97,6 +95,10 @@ var _hmt = _hmt || [];
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="http://space.bilibili.com/606913?share_medium=android&share_source=qq&bbid=07DAE200-448E-4E3A-A4B3-A92225EF49C819752infoc&ts=1521095597280" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1054979645@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -126,14 +128,16 @@ var _hmt = _hmt || [];
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="http://space.bilibili.com/606913?share_medium=android&share_source=qq&bbid=07DAE200-448E-4E3A-A4B3-A92225EF49C819752infoc&ts=1521095597280" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1054979645@qq.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -142,9 +146,7 @@ var _hmt = _hmt || [];
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -283,20 +285,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/03/15/frpConfig/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/15/搭建hadopp+Kylin服务器环境/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          frpc客户端配置文件说明
+          hadopp+Kylin服务器搭建教程
         
       </div>
     </a>
   
-  
-    <a href="/2018/03/15/使用pentaho+sqoop进行数据更新的实施方案/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pentaho+sqoop实现mysql到hive的数据增量更新</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
@@ -313,6 +310,19 @@ var _hmt = _hmt || [];
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"><span class="toc-number">1.</span> <span class="toc-text">1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-在cmd中键入命令，进入服务编辑页面："><span class="toc-number">2.</span> <span class="toc-text">2. 在cmd中键入命令，进入服务编辑页面：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-设置服务路径地址"><span class="toc-number">3.</span> <span class="toc-text">3. 设置服务路径地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-设置详details"><span class="toc-number">4.</span> <span class="toc-text">4.设置详details</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-设置log-on"><span class="toc-number">5.</span> <span class="toc-text">5.设置log on</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-设置I-O选项卡"><span class="toc-number">6.</span> <span class="toc-text">5.设置I / O选项卡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他选项卡信息使用默认设置即可。"><span class="toc-number"></span> <span class="toc-text">其他选项卡信息使用默认设置即可。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nssm-常用命令"><span class="toc-number"></span> <span class="toc-text">nssm 常用命令</span></a>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -364,7 +374,7 @@ var _hmt = _hmt || [];
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -442,14 +452,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">frp</a>
               </li>
              
@@ -458,11 +460,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
+                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,6 +477,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>

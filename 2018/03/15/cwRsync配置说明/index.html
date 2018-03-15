@@ -82,8 +82,6 @@ var _hmt = _hmt || [];
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -103,6 +101,10 @@ var _hmt = _hmt || [];
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="http://space.bilibili.com/606913?share_medium=android&share_source=qq&bbid=07DAE200-448E-4E3A-A4B3-A92225EF49C819752infoc&ts=1521095597280" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1054979645@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -132,14 +134,16 @@ var _hmt = _hmt || [];
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="http://space.bilibili.com/606913?share_medium=android&share_source=qq&bbid=07DAE200-448E-4E3A-A4B3-A92225EF49C819752infoc&ts=1521095597280" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1054979645@qq.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -148,9 +152,7 @@ var _hmt = _hmt || [];
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -308,18 +310,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/03/15/Hive分区学习/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/15/frpConfig/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          HIVE—索引、分区和分桶的区别
+          frpc客户端配置文件说明
         
       </div>
     </a>
   
   
-    <a href="/2018/03/15/frpConfig/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">frpc客户端配置文件说明</div>
+    <a href="/2018/03/15/使用pentaho+sqoop进行数据更新的实施方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">pentaho+sqoop实现mysql到hive的数据增量更新</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -338,6 +340,19 @@ var _hmt = _hmt || [];
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#cwRsync下载地址"><span class="toc-number">1.</span> <span class="toc-text">cwRsync下载地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器端安装及配置"><span class="toc-number">2.</span> <span class="toc-text">服务器端安装及配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端安装及使用"><span class="toc-number">3.</span> <span class="toc-text">客户端安装及使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端命令行参数说明"><span class="toc-number">3.1.</span> <span class="toc-text">客户端命令行参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端命令添加到window计划任务"><span class="toc-number">3.2.</span> <span class="toc-text">客户端命令添加到window计划任务</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -389,7 +404,7 @@ var _hmt = _hmt || [];
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -467,14 +482,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">frp</a>
               </li>
              
@@ -483,11 +490,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
+                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,6 +507,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>

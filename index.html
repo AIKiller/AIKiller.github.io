@@ -70,8 +70,6 @@ var _hmt = _hmt || [];
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -91,6 +89,10 @@ var _hmt = _hmt || [];
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="http://space.bilibili.com/606913?share_medium=android&share_source=qq&bbid=07DAE200-448E-4E3A-A4B3-A92225EF49C819752infoc&ts=1521095597280" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1054979645@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -120,14 +122,16 @@ var _hmt = _hmt || [];
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/AIKiller" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="http://space.bilibili.com/606913?share_medium=android&share_source=qq&bbid=07DAE200-448E-4E3A-A4B3-A92225EF49C819752infoc&ts=1521095597280" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1054979645@qq.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -136,9 +140,7 @@ var _hmt = _hmt || [];
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -262,6 +264,86 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-frpConfig" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/frpConfig/">frpc客户端配置文件说明</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/frpConfig/" class="archive-article-date">
+  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="frp-下载地址"><a href="#frp-下载地址" class="headerlink" title="frp 下载地址"></a>frp 下载地址</h2><p>可根据需要从<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">github</a>上下载对应操作系统的程序（当前最新版本为v0.16.0）。<br><em>注：frps及frps.ini分别为服务器端程序和其配置文件。个人使用只需要frpc以及frpc.ini配置文件即可。</em></p>
+<h3 id="frpc-ini-配置文件使用说明"><a href="#frpc-ini-配置文件使用说明" class="headerlink" title="frpc.ini 配置文件使用说明"></a>frpc.ini 配置文件使用说明</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 公共设置</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># 服务器相关配置（必填）</span></span><br><span class="line"><span class="attr">server_addr</span> = ngrok.shunnengnet.com</span><br><span class="line"><span class="attr">server_port</span> = <span class="number">7000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要配置http代理时可配置此项（可选）</span></span><br><span class="line"><span class="comment">#  http_proxy = http://user:pwd@192.168.1.128:8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置日志输出文件位置（可选）</span></span><br><span class="line"><span class="comment"># log_file = ./frpc.log</span></span><br><span class="line"><span class="comment"># 日志等级：trace, debug, info, warn, error</span></span><br><span class="line"><span class="comment"># log_level = info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 身份验证密钥（必填）</span></span><br><span class="line"><span class="attr">privilege_token</span> = U2FsdGVkX1+R4/buVe+bnrBaJciJzmxNy9P9nBcDAf8=</span><br><span class="line"></span><br><span class="line"><span class="comment"># frp支持热加载配置文件，当修改了 frpc 中的代理配置，可以通过 frpc reload 命令来动态加载配置文件。（可选）</span></span><br><span class="line"><span class="comment"># 启用此功能需要在 frpc 中启用 admin 端口，用于提供 API 服务。</span></span><br><span class="line"><span class="comment"># 详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###客户端热加载配置文件</span></span><br><span class="line"><span class="comment"># admin_addr = 127.0.0.1</span></span><br><span class="line"><span class="comment"># admin_port = 7400</span></span><br><span class="line"><span class="comment"># admin_user = admin</span></span><br><span class="line"><span class="comment"># admin_pwd = admin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># frp中代理名称不可重复使用，为了方便管理和规范需要配置此项进行区分，建议使用个人名称拼音或简写。（必填）</span></span><br><span class="line"><span class="comment"># 注意，当设置如下配置时，每个代理名称前会自动增加前缀。代理名称将会显示为&#123;your_name&#125;.&#123;proxy_name&#125;</span></span><br><span class="line"><span class="attr">user</span> = your_name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为各代理段配置示例</span></span><br><span class="line"><span class="comment"># 客户端可根据需要配置多个代理，使用[proxy_name]配置当前代理名称</span></span><br><span class="line"><span class="comment"># 如：ssh为当前代理配置在服务器中显示的代理名称。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.可使用此方式进行ssh配置，此示例可通过ngrok.shunnengnet.com:6001进行链接。</span></span><br><span class="line"><span class="section">[ssh]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">22</span></span><br><span class="line"><span class="comment"># 服务器的映射端口号，使用规范统一参考：http://svn.jiankangsn.com/svn/HospitalDocuments/域名管理和Nginx规范/2. ngrok端口配置.txt</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6001</span></span><br><span class="line"><span class="comment"># 加密和压缩服务</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.范围端口映射，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###范围端口映射</span></span><br><span class="line"><span class="section">[range:tcp_port]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">6010</span>-<span class="number">6020</span>,<span class="number">6022</span>,<span class="number">6024</span>-<span class="number">6028</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6010</span>-<span class="number">6020</span>,<span class="number">6022</span>,<span class="number">6024</span>-<span class="number">6028</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.自定义二级域名访问本地web服务</span></span><br><span class="line"><span class="section">[web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="comment"># 设置二级域名的前缀。</span></span><br><span class="line"><span class="comment"># 服务器默认地址为：ngrok.shunnengnet.com。</span></span><br><span class="line"><span class="comment"># 当使用如下subdomain配置时，可通过访问web.ngrok.shunnengnet.com:8080访问被映射服务器的web应用</span></span><br><span class="line"><span class="attr">subdomain</span> = web</span><br><span class="line"><span class="comment"># 可以通过设置http_user和http_pwd参数给web应用添加身份验证（可选）</span></span><br><span class="line"><span class="comment"># http_user = admin</span></span><br><span class="line"><span class="comment"># http_pwd = admin</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.多级路由，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###url-路由</span></span><br><span class="line"><span class="section">[web01]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = ngrok.shunnengnet.com</span><br><span class="line"><span class="attr">locations</span> =/</span><br><span class="line"></span><br><span class="line"><span class="section">[web02]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">180</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = ngrok.shunnengnet.com</span><br><span class="line"><span class="attr">locations</span> =/web,/news</span><br><span class="line"><span class="comment"># 按照上述的示例配置后，ngrok.shunnengnet.com 域名下所有以 /web 以及 /news 作为前缀的 URL 请求都会被转发到 web02，其余的请求会被转发到 web01。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.静态资源服务器配置示例，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###对外提供简单的文件访问服务</span></span><br><span class="line"><span class="section">[plugin_static_file]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6006</span></span><br><span class="line"><span class="attr">plugin</span> = static_file</span><br><span class="line"><span class="attr">plugin_local_path</span> = /var/www/blog</span><br><span class="line"><span class="attr">plugin_strip_prefix</span> = static</span><br><span class="line"><span class="attr">plugin_http_user</span> = abc</span><br><span class="line"><span class="attr">plugin_http_passwd</span> = abc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6.统一使用该方法搭建3389连接</span></span><br><span class="line"><span class="comment"># 此方法需要在两台机器上同时配置frpc，详情请见：https://github.com/fatedier/frp/blob/master/README_zh.md###安全地暴露内网服务</span></span><br><span class="line"><span class="comment"># 远程机器（即前置机）的frpc配置文件如下：</span></span><br><span class="line"><span class="section">[remote]</span></span><br><span class="line"><span class="attr">type</span> = stcp</span><br><span class="line"><span class="comment"># 两台远程机器相匹配的身份验证号，可自行配置。保证两台机器具有相同的sk即可。</span></span><br><span class="line"><span class="attr">sk</span> = abcdefg</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">3389</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地机器frpc配置如下</span></span><br><span class="line"><span class="section">[remote_visitor]</span></span><br><span class="line"><span class="attr">role</span> = visitor</span><br><span class="line"><span class="attr">type</span> = stcp</span><br><span class="line"><span class="comment"># 远程连接的代理名称。 </span></span><br><span class="line"><span class="comment"># 注意frp客户端设置user字段后，frp自动增加用户名前缀</span></span><br><span class="line"><span class="comment"># 因此使用此配置连接远程服务器时，该代理自动连接的是&#123;user&#125;.remote映射的远程机器。</span></span><br><span class="line"><span class="comment"># 因此，此配置项只需与远程机器（即前置机）上配置的代理名称相匹配即可。</span></span><br><span class="line"><span class="attr">server_name</span> = remote</span><br><span class="line"><span class="comment"># 两台远程机器相匹配的身份验证号，可自行配置。保证两台机器具有相同的sk即可。</span></span><br><span class="line"><span class="attr">sk</span> = abcdefg</span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">9000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>其他功能详情请参考<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">github</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">frp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">远程连接</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/frpConfig/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cwRsync配置说明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -346,180 +428,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/15/cwRsync配置说明/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-frpConfig" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/15/frpConfig/">frpc客户端配置文件说明</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/15/frpConfig/" class="archive-article-date">
-  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="frp-下载地址"><a href="#frp-下载地址" class="headerlink" title="frp 下载地址"></a>frp 下载地址</h2><p>可根据需要从<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">github</a>上下载对应操作系统的程序（当前最新版本为v0.16.0）。<br><em>注：frps及frps.ini分别为服务器端程序和其配置文件。个人使用只需要frpc以及frpc.ini配置文件即可。</em></p>
-<h3 id="frpc-ini-配置文件使用说明"><a href="#frpc-ini-配置文件使用说明" class="headerlink" title="frpc.ini 配置文件使用说明"></a>frpc.ini 配置文件使用说明</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 公共设置</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># 服务器相关配置（必填）</span></span><br><span class="line"><span class="attr">server_addr</span> = ngrok.shunnengnet.com</span><br><span class="line"><span class="attr">server_port</span> = <span class="number">7000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要配置http代理时可配置此项（可选）</span></span><br><span class="line"><span class="comment">#  http_proxy = http://user:pwd@192.168.1.128:8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置日志输出文件位置（可选）</span></span><br><span class="line"><span class="comment"># log_file = ./frpc.log</span></span><br><span class="line"><span class="comment"># 日志等级：trace, debug, info, warn, error</span></span><br><span class="line"><span class="comment"># log_level = info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 身份验证密钥（必填）</span></span><br><span class="line"><span class="attr">privilege_token</span> = U2FsdGVkX1+R4/buVe+bnrBaJciJzmxNy9P9nBcDAf8=</span><br><span class="line"></span><br><span class="line"><span class="comment"># frp支持热加载配置文件，当修改了 frpc 中的代理配置，可以通过 frpc reload 命令来动态加载配置文件。（可选）</span></span><br><span class="line"><span class="comment"># 启用此功能需要在 frpc 中启用 admin 端口，用于提供 API 服务。</span></span><br><span class="line"><span class="comment"># 详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###客户端热加载配置文件</span></span><br><span class="line"><span class="comment"># admin_addr = 127.0.0.1</span></span><br><span class="line"><span class="comment"># admin_port = 7400</span></span><br><span class="line"><span class="comment"># admin_user = admin</span></span><br><span class="line"><span class="comment"># admin_pwd = admin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># frp中代理名称不可重复使用，为了方便管理和规范需要配置此项进行区分，建议使用个人名称拼音或简写。（必填）</span></span><br><span class="line"><span class="comment"># 注意，当设置如下配置时，每个代理名称前会自动增加前缀。代理名称将会显示为&#123;your_name&#125;.&#123;proxy_name&#125;</span></span><br><span class="line"><span class="attr">user</span> = your_name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为各代理段配置示例</span></span><br><span class="line"><span class="comment"># 客户端可根据需要配置多个代理，使用[proxy_name]配置当前代理名称</span></span><br><span class="line"><span class="comment"># 如：ssh为当前代理配置在服务器中显示的代理名称。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.可使用此方式进行ssh配置，此示例可通过ngrok.shunnengnet.com:6001进行链接。</span></span><br><span class="line"><span class="section">[ssh]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">22</span></span><br><span class="line"><span class="comment"># 服务器的映射端口号，使用规范统一参考：http://svn.jiankangsn.com/svn/HospitalDocuments/域名管理和Nginx规范/2. ngrok端口配置.txt</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6001</span></span><br><span class="line"><span class="comment"># 加密和压缩服务</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.范围端口映射，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###范围端口映射</span></span><br><span class="line"><span class="section">[range:tcp_port]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">6010</span>-<span class="number">6020</span>,<span class="number">6022</span>,<span class="number">6024</span>-<span class="number">6028</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6010</span>-<span class="number">6020</span>,<span class="number">6022</span>,<span class="number">6024</span>-<span class="number">6028</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.自定义二级域名访问本地web服务</span></span><br><span class="line"><span class="section">[web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="comment"># 设置二级域名的前缀。</span></span><br><span class="line"><span class="comment"># 服务器默认地址为：ngrok.shunnengnet.com。</span></span><br><span class="line"><span class="comment"># 当使用如下subdomain配置时，可通过访问web.ngrok.shunnengnet.com:8080访问被映射服务器的web应用</span></span><br><span class="line"><span class="attr">subdomain</span> = web</span><br><span class="line"><span class="comment"># 可以通过设置http_user和http_pwd参数给web应用添加身份验证（可选）</span></span><br><span class="line"><span class="comment"># http_user = admin</span></span><br><span class="line"><span class="comment"># http_pwd = admin</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.多级路由，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###url-路由</span></span><br><span class="line"><span class="section">[web01]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = ngrok.shunnengnet.com</span><br><span class="line"><span class="attr">locations</span> =/</span><br><span class="line"></span><br><span class="line"><span class="section">[web02]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">180</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = ngrok.shunnengnet.com</span><br><span class="line"><span class="attr">locations</span> =/web,/news</span><br><span class="line"><span class="comment"># 按照上述的示例配置后，ngrok.shunnengnet.com 域名下所有以 /web 以及 /news 作为前缀的 URL 请求都会被转发到 web02，其余的请求会被转发到 web01。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.静态资源服务器配置示例，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###对外提供简单的文件访问服务</span></span><br><span class="line"><span class="section">[plugin_static_file]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6006</span></span><br><span class="line"><span class="attr">plugin</span> = static_file</span><br><span class="line"><span class="attr">plugin_local_path</span> = /var/www/blog</span><br><span class="line"><span class="attr">plugin_strip_prefix</span> = static</span><br><span class="line"><span class="attr">plugin_http_user</span> = abc</span><br><span class="line"><span class="attr">plugin_http_passwd</span> = abc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6.统一使用该方法搭建3389连接</span></span><br><span class="line"><span class="comment"># 此方法需要在两台机器上同时配置frpc，详情请见：https://github.com/fatedier/frp/blob/master/README_zh.md###安全地暴露内网服务</span></span><br><span class="line"><span class="comment"># 远程机器（即前置机）的frpc配置文件如下：</span></span><br><span class="line"><span class="section">[remote]</span></span><br><span class="line"><span class="attr">type</span> = stcp</span><br><span class="line"><span class="comment"># 两台远程机器相匹配的身份验证号，可自行配置。保证两台机器具有相同的sk即可。</span></span><br><span class="line"><span class="attr">sk</span> = abcdefg</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">3389</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地机器frpc配置如下</span></span><br><span class="line"><span class="section">[remote_visitor]</span></span><br><span class="line"><span class="attr">role</span> = visitor</span><br><span class="line"><span class="attr">type</span> = stcp</span><br><span class="line"><span class="comment"># 远程连接的代理名称。 </span></span><br><span class="line"><span class="comment"># 注意frp客户端设置user字段后，frp自动增加用户名前缀</span></span><br><span class="line"><span class="comment"># 因此使用此配置连接远程服务器时，该代理自动连接的是&#123;user&#125;.remote映射的远程机器。</span></span><br><span class="line"><span class="comment"># 因此，此配置项只需与远程机器（即前置机）上配置的代理名称相匹配即可。</span></span><br><span class="line"><span class="attr">server_name</span> = remote</span><br><span class="line"><span class="comment"># 两台远程机器相匹配的身份验证号，可自行配置。保证两台机器具有相同的sk即可。</span></span><br><span class="line"><span class="attr">sk</span> = abcdefg</span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">9000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>其他功能详情请参考<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">github</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">frp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">远程连接</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/15/frpConfig/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-将frpc注册为windows服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/15/将frpc注册为windows服务/">注册frpc为windows服务</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/15/将frpc注册为windows服务/" class="archive-article-date">
-  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此方法使用<a href="https://nssm.cc/release/nssm-2.24.zip" target="_blank" rel="noopener">nssm(稳定版本)</a>工具将.EXE文件注册为Windows服务</p>
-<h3 id="1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"><a href="#1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）" class="headerlink" title="1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"></a>1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）</h3><p>使用cmd进入工具路径后可键入nssm查看工具使用参数，或直接双击查看工具使用参数。</p>
-<h3 id="2-在cmd中键入命令，进入服务编辑页面："><a href="#2-在cmd中键入命令，进入服务编辑页面：" class="headerlink" title="2. 在cmd中键入命令，进入服务编辑页面："></a>2. 在cmd中键入命令，进入服务编辑页面：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName</span><br></pre></td></tr></table></figure>
-<h3 id="3-设置服务路径地址"><a href="#3-设置服务路径地址" class="headerlink" title="3. 设置服务路径地址"></a>3. 设置服务路径地址</h3><p>如下所示点击Path，为需要注册为服务的应用选择所在路径。Starup directory将自动生成。</p>
-<p><img src="https://nssm.cc/images/install_application.png" alt=""></p>
-<blockquote>
-<p>注：图中所示的Arguments参数请不要设置否则会造成服务开启失败。</p>
-</blockquote>
-<h3 id="4-设置详details"><a href="#4-设置详details" class="headerlink" title="4.设置详details"></a>4.设置详details</h3><p>设置服务的描述信息</p>
-<p><img src="https://nssm.cc/images/install_details.png" alt=""></p>
-<h3 id="5-设置log-on"><a href="#5-设置log-on" class="headerlink" title="5.设置log on"></a>5.设置log on</h3><p>勾选Allow service to interact with desktop选项</p>
-<p><img src="https://nssm.cc/images/install_logon.png" alt=""></p>
-<h3 id="5-设置I-O选项卡"><a href="#5-设置I-O选项卡" class="headerlink" title="5.设置I / O选项卡"></a>5.设置I / O选项卡</h3><p>在frpc文件夹下创建日志输出文件，并选择。</p>
-<p><img src="https://nssm.cc/images/install_io.png" alt=""></p>
-<h2 id="其他选项卡信息使用默认设置即可。"><a href="#其他选项卡信息使用默认设置即可。" class="headerlink" title="其他选项卡信息使用默认设置即可。"></a>其他选项卡信息使用默认设置即可。</h2><hr>
-<h2 id="nssm-常用命令"><a href="#nssm-常用命令" class="headerlink" title="nssm 常用命令"></a>nssm 常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName 	<span class="comment">#安装服务</span></span><br><span class="line">nssm edit serviceName 		<span class="comment">#使用GUI编辑已安装的服务</span></span><br><span class="line">nssm restart serviceName 	<span class="comment">#重新启动服务</span></span><br><span class="line">nssm remove serviceName 	<span class="comment">#删除已安装的服务</span></span><br></pre></td></tr></table></figure>
-<p>文章参考至<a href="https://nssm.cc/usage" target="_blank" rel="noopener">nssm官方文档</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">frpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">windows服务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/15/将frpc注册为windows服务/">展开全文 >></a>
         </p>
       
 
@@ -880,6 +788,100 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-将frpc注册为windows服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/将frpc注册为windows服务/">注册frpc为windows服务</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/将frpc注册为windows服务/" class="archive-article-date">
+  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此方法使用<a href="https://nssm.cc/release/nssm-2.24.zip" target="_blank" rel="noopener">nssm(稳定版本)</a>工具将.EXE文件注册为Windows服务</p>
+<h3 id="1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"><a href="#1-下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）" class="headerlink" title="1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）"></a>1. 下载并解压压缩包，使用cmd进入对应系统版本工具的路径。（请使用管理员身份运行cmd）</h3><p>使用cmd进入工具路径后可键入nssm查看工具使用参数，或直接双击查看工具使用参数。</p>
+<h3 id="2-在cmd中键入命令，进入服务编辑页面："><a href="#2-在cmd中键入命令，进入服务编辑页面：" class="headerlink" title="2. 在cmd中键入命令，进入服务编辑页面："></a>2. 在cmd中键入命令，进入服务编辑页面：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName</span><br></pre></td></tr></table></figure>
+<h3 id="3-设置服务路径地址"><a href="#3-设置服务路径地址" class="headerlink" title="3. 设置服务路径地址"></a>3. 设置服务路径地址</h3><p>如下所示点击Path，为需要注册为服务的应用选择所在路径。Starup directory将自动生成。</p>
+<p><img src="https://nssm.cc/images/install_application.png" alt=""></p>
+<blockquote>
+<p>注：图中所示的Arguments参数请不要设置否则会造成服务开启失败。</p>
+</blockquote>
+<h3 id="4-设置详details"><a href="#4-设置详details" class="headerlink" title="4.设置详details"></a>4.设置详details</h3><p>设置服务的描述信息</p>
+<p><img src="https://nssm.cc/images/install_details.png" alt=""></p>
+<h3 id="5-设置log-on"><a href="#5-设置log-on" class="headerlink" title="5.设置log on"></a>5.设置log on</h3><p>勾选Allow service to interact with desktop选项</p>
+<p><img src="https://nssm.cc/images/install_logon.png" alt=""></p>
+<h3 id="5-设置I-O选项卡"><a href="#5-设置I-O选项卡" class="headerlink" title="5.设置I / O选项卡"></a>5.设置I / O选项卡</h3><p>在frpc文件夹下创建日志输出文件，并选择。</p>
+<p><img src="https://nssm.cc/images/install_io.png" alt=""></p>
+<h2 id="其他选项卡信息使用默认设置即可。"><a href="#其他选项卡信息使用默认设置即可。" class="headerlink" title="其他选项卡信息使用默认设置即可。"></a>其他选项卡信息使用默认设置即可。</h2><hr>
+<h2 id="nssm-常用命令"><a href="#nssm-常用命令" class="headerlink" title="nssm 常用命令"></a>nssm 常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nssm install serviceName 	<span class="comment">#安装服务</span></span><br><span class="line">nssm edit serviceName 		<span class="comment">#使用GUI编辑已安装的服务</span></span><br><span class="line">nssm restart serviceName 	<span class="comment">#重新启动服务</span></span><br><span class="line">nssm remove serviceName 	<span class="comment">#删除已安装的服务</span></span><br></pre></td></tr></table></figure>
+<p>文章参考至<a href="https://nssm.cc/usage" target="_blank" rel="noopener">nssm官方文档</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">frpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">windows服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/将frpc注册为windows服务/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
@@ -907,7 +909,7 @@ var _hmt = _hmt || [];
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -985,14 +987,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">frp</a>
               </li>
              
@@ -1001,11 +995,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
+                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1018,6 +1012,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>
