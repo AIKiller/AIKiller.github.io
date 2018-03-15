@@ -1118,19 +1118,19 @@ function(e) {
         if (n(197), window.BJ_REPORT) {
             BJ_REPORT.init({
                 id: 1
-            }),
-            BJ_REPORT.init({
-                id: 1,
-                uin: window.location.origin,
-                combo: 0,
-                delay: 1e3,
-                url: "//litten.me:9005/badjs/",
-                ignore: [/Script error/i],
-                random: 1,
-                repeat: 5e5,
-                onReport: function(e, t) {},
-                ext: {}
             });
+   			 //     BJ_REPORT.init({
+              //  id: 1,
+              //  uin: window.location.origin,
+              //  combo: 0,
+              //  delay: 1e3,
+              //  url: "//litten.me:9005/badjs/",
+              //  ignore: [/Script error/i],
+              //  random: 1,
+              //  repeat: 5e5,
+              //  onReport: function(e, t) {},
+      //    ext: {}
+        //    });
             var i = window.location.host,
             a = top === window,
             u = !(/localhost/i.test(i) || /127.0.0.1/i.test(i) || /0.0.0.0/i.test(i));
