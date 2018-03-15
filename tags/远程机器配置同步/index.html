@@ -79,6 +79,8 @@ var _hmt = _hmt || [];
     			
             
     			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情连接</a>
+    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -172,14 +174,14 @@ var _hmt = _hmt || [];
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<a href="/2018/03/15/cwRsync配置说明/" class="archive-article-date">
-  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+	      	<a href="/2018/03/10/cwRsync配置说明/" class="archive-article-date">
+  	<time datetime="2018-03-10T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
 </a>
         </div>
     	 
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/15/cwRsync配置说明/">cwRsync 配置说明</a>
+      <a class="archive-article-title" href="/2018/03/10/cwRsync配置说明/">cwRsync 配置说明</a>
     </h1>
   
 
@@ -239,7 +241,7 @@ var _hmt = _hmt || [];
 		isArchive: false,
 		isTag: true,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: ,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -263,6 +265,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+      
+      
     
       
       
@@ -274,13 +278,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友情连接</a></li>
+      
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -317,6 +323,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">frp</a>
               </li>
              
@@ -325,11 +339,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -342,14 +356,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>
@@ -395,6 +401,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://juejin.im/user/58748572b123db4a2eccd3e0" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>掘金</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com/u/1daa5424ab2e" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://jh.jiankangsn.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>jhipster开发笔记</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://jhipster.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>jhipster</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     

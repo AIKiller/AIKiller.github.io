@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="//killer.me">
   <title>HIVE—索引、分区和分桶的区别 | Killer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、索引简介Hive支持索引，但是Hive的索引与关系型数据库中的索引并不相同，比如，Hive不支持主键或者外键。 Hive索引可以建立在表中的某些列上，以提升一些操作的效率，例如减少MapReduce任务中需要读取的数据块的数量。 为什么要创建索引？Hive的索引目的是提高Hive表指定列的查询速度。没有索引时，类似’WHERE tab1.col1 = 10’ 的查询，Hive会加载整张表或分区">
+  <meta name="description" content="本文简单讲解了HIVE中索引、分区和分桶的区别，留作笔记。">
 <meta name="keywords" content="hive,索引,分区,分桶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HIVE—索引、分区和分桶的区别">
-<meta property="og:url" content="//killer.me/2018/03/15/Hive分区学习/index.html">
+<meta property="og:url" content="//killer.me/2018/03/01/Hive分区学习/index.html">
 <meta property="og:site_name" content="Killer的博客">
-<meta property="og:description" content="一、索引简介Hive支持索引，但是Hive的索引与关系型数据库中的索引并不相同，比如，Hive不支持主键或者外键。 Hive索引可以建立在表中的某些列上，以提升一些操作的效率，例如减少MapReduce任务中需要读取的数据块的数量。 为什么要创建索引？Hive的索引目的是提高Hive表指定列的查询速度。没有索引时，类似’WHERE tab1.col1 = 10’ 的查询，Hive会加载整张表或分区">
-<meta property="og:updated_time" content="2018-03-15T01:15:38.993Z">
+<meta property="og:description" content="本文简单讲解了HIVE中索引、分区和分桶的区别，留作笔记。">
+<meta property="og:updated_time" content="2018-03-15T07:49:11.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIVE—索引、分区和分桶的区别">
-<meta name="twitter:description" content="一、索引简介Hive支持索引，但是Hive的索引与关系型数据库中的索引并不相同，比如，Hive不支持主键或者外键。 Hive索引可以建立在表中的某些列上，以提升一些操作的效率，例如减少MapReduce任务中需要读取的数据块的数量。 为什么要创建索引？Hive的索引目的是提高Hive表指定列的查询速度。没有索引时，类似’WHERE tab1.col1 = 10’ 的查询，Hive会加载整张表或分区">
+<meta name="twitter:description" content="本文简单讲解了HIVE中索引、分区和分桶的区别，留作笔记。">
   
     <link rel="alternative" href="/atom.xml" title="Killer的博客" type="application/atom+xml">
   
@@ -79,6 +79,8 @@ var _hmt = _hmt || [];
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情连接</a>
     			
             
     			
@@ -168,15 +170,19 @@ var _hmt = _hmt || [];
   
 
         
-        <a href="/2018/03/15/Hive分区学习/" class="archive-article-date">
-  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+        <a href="/2018/03/01/Hive分区学习/" class="archive-article-date">
+  	<time datetime="2018-03-01T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Hive支持索引，但是Hive的索引与关系型数据库中的索引并不相同，比如，Hive不支持主键或者外键。</p>
+        <blockquote>
+<p>本文简单讲解了HIVE中索引、分区和分桶的区别，留作笔记。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Hive支持索引，但是Hive的索引与关系型数据库中的索引并不相同，比如，Hive不支持主键或者外键。</p>
 <p>Hive索引可以建立在表中的某些列上，以提升一些操作的效率，例如减少MapReduce任务中需要读取的数据块的数量。</p>
 <h3 id="为什么要创建索引？"><a href="#为什么要创建索引？" class="headerlink" title="为什么要创建索引？"></a>为什么要创建索引？</h3><p>Hive的索引目的是提高Hive表指定列的查询速度。<br>没有索引时，类似’WHERE tab1.col1 = 10’ 的查询，Hive会加载整张表或分区，然后处理所有的rows，<br>但是如果在字段col1上面存在索引时，那么只会加载和处理文件的一部分。<br>与其他传统数据库一样，增加索引在提升查询速度时，会消耗额外资源去创建索引表和需要更多的磁盘空间存储索引。</p>
 <h2 id="二、分区"><a href="#二、分区" class="headerlink" title="二、分区"></a>二、分区</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p>为了对表进行合理的管理以及提高查询效率，Hive可以将表组织成“分区”。</p>
@@ -279,7 +285,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://killer.me/2018/03/15/Hive分区学习/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://killer.me/2018/03/01/Hive分区学习/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -293,11 +299,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-  
-    <a href="/2018/03/15/frpConfig/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">frpc客户端配置文件说明</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2018/03/10/cwRsync配置说明/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          cwRsync 配置说明
+        
+      </div>
     </a>
+  
   
 </nav>
 
@@ -378,7 +388,7 @@ var _hmt = _hmt || [];
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: ,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -402,6 +412,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+      
+      
     
       
       
@@ -413,13 +425,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友情连接</a></li>
+      
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -456,6 +470,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">frp</a>
               </li>
              
@@ -464,11 +486,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,14 +503,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>
@@ -534,6 +548,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://juejin.im/user/58748572b123db4a2eccd3e0" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>掘金</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com/u/1daa5424ab2e" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://jh.jiankangsn.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>jhipster开发笔记</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://jhipster.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>jhipster</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     

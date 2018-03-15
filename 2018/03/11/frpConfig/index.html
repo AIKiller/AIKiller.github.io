@@ -6,24 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//killer.me">
-  <title>hadopp+Kylin服务器搭建教程 | Killer的博客</title>
+  <title>frpc客户端配置文件说明 | Killer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.创建hadoop用户123456//添加hadoop用户sudo useradd -m hadoop -s /bin/bash//设置用户密码sudo passwd hadoop//添加管理员权限sudo adduser hadoop sudo   切换至hadopp用户 2.搭建hadoop服务器hadoop的搭建可参考hadoop  更新apt源  1sudo apt-get update">
-<meta name="keywords" content="hive,hadopp,hbase,kylin">
+  <meta name="description" content="公司之前使用ngrok作为数据转发的工具，虽然配置简便，但是安全系数较低。 现根据需要使用新的工具frp代替ngrok，本教程简单介绍frpc的配置文件。">
+<meta name="keywords" content="frp,远程连接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hadopp+Kylin服务器搭建教程">
-<meta property="og:url" content="//killer.me/2018/03/15/搭建hadopp+Kylin服务器环境/index.html">
+<meta property="og:title" content="frpc客户端配置文件说明">
+<meta property="og:url" content="//killer.me/2018/03/11/frpConfig/index.html">
 <meta property="og:site_name" content="Killer的博客">
-<meta property="og:description" content="1.创建hadoop用户123456//添加hadoop用户sudo useradd -m hadoop -s /bin/bash//设置用户密码sudo passwd hadoop//添加管理员权限sudo adduser hadoop sudo   切换至hadopp用户 2.搭建hadoop服务器hadoop的搭建可参考hadoop  更新apt源  1sudo apt-get update">
-<meta property="og:image" content="http://cdn.powerxing.com/imgs/install-hadoop-08-ssh-continue.png">
-<meta property="og:image" content="http://cdn.powerxing.com/imgs/install-hadoop-14-namenode-format.png">
-<meta property="og:image" content="http://cdn.powerxing.com/imgs/install-hadoop-17-web-ui.png">
-<meta property="og:image" content="http://cdn.powerxing.com/imgs/install-hadoop-19-start-yarn.png">
-<meta property="og:updated_time" content="2018-03-15T01:29:39.640Z">
+<meta property="og:description" content="公司之前使用ngrok作为数据转发的工具，虽然配置简便，但是安全系数较低。 现根据需要使用新的工具frp代替ngrok，本教程简单介绍frpc的配置文件。">
+<meta property="og:updated_time" content="2018-03-15T07:49:01.833Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hadopp+Kylin服务器搭建教程">
-<meta name="twitter:description" content="1.创建hadoop用户123456//添加hadoop用户sudo useradd -m hadoop -s /bin/bash//设置用户密码sudo passwd hadoop//添加管理员权限sudo adduser hadoop sudo   切换至hadopp用户 2.搭建hadoop服务器hadoop的搭建可参考hadoop  更新apt源  1sudo apt-get update">
-<meta name="twitter:image" content="http://cdn.powerxing.com/imgs/install-hadoop-08-ssh-continue.png">
+<meta name="twitter:title" content="frpc客户端配置文件说明">
+<meta name="twitter:description" content="公司之前使用ngrok作为数据转发的工具，虽然配置简便，但是安全系数较低。 现根据需要使用新的工具frp代替ngrok，本教程简单介绍frpc的配置文件。">
   
     <link rel="alternative" href="/atom.xml" title="Killer的博客" type="application/atom+xml">
   
@@ -84,6 +79,8 @@ var _hmt = _hmt || [];
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情连接</a>
     			
             
     			
@@ -161,138 +158,35 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-搭建hadopp+Kylin服务器环境" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-frpConfig" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hadopp+Kylin服务器搭建教程
+      frpc客户端配置文件说明
     </h1>
   
 
         
-        <a href="/2018/03/15/搭建hadopp+Kylin服务器环境/" class="archive-article-date">
-  	<time datetime="2018-03-15T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+        <a href="/2018/03/11/frpConfig/" class="archive-article-date">
+  	<time datetime="2018-03-11T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-创建hadoop用户"><a href="#1-创建hadoop用户" class="headerlink" title="1.创建hadoop用户"></a>1.创建hadoop用户</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>添加hadoop用户</span><br><span class="line">sudo useradd -m hadoop -s <span class="regexp">/bin/</span>bash</span><br><span class="line"><span class="regexp">//</span>设置用户密码</span><br><span class="line">sudo passwd hadoop</span><br><span class="line"><span class="regexp">//</span>添加管理员权限</span><br><span class="line">sudo adduser hadoop sudo</span><br></pre></td></tr></table></figure>
-<p>  <strong>切换至hadopp用户</strong></p>
-<h2 id="2-搭建hadoop服务器"><a href="#2-搭建hadoop服务器" class="headerlink" title="2.搭建hadoop服务器"></a>2.搭建hadoop服务器</h2><p>hadoop的搭建可参考<a href="http://www.powerxing.com/install-hadoop/" target="_blank" rel="noopener">hadoop</a></p>
-<blockquote>
-<p>更新apt源</p>
+        <blockquote>
+<p>公司之前使用ngrok作为数据转发的工具，虽然配置简便，但是安全系数较低。</p>
+<p>现根据需要使用新的工具frp代替ngrok，本教程简单介绍frpc的配置文件。</p>
 </blockquote>
-<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> <span class="keyword">update</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>安装SSH、配置SSH无密码登陆</p>
-</blockquote>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//安装SSH service</span></span><br><span class="line">sudo apt-<span class="keyword">get</span> install openssh-server</span><br><span class="line"></span><br><span class="line"><span class="comment">//登陆本机</span></span><br><span class="line">ssh localhost</span><br></pre></td></tr></table></figure>
-<p>此时会有如下提示(SSH首次登陆提示)，输入 yes 。然后按提示输入密码 hadoop，这样就登陆到本机了。<br>!<img src="http://cdn.powerxing.com/imgs/install-hadoop-08-ssh-continue.png" alt="image"><br>但这样登陆是需要每次输入密码的，我们需要配置成SSH无密码登陆比较方便。</p>
-<p>首先退出刚才的 ssh，就回到了我们原先的终端窗口，然后利用 ssh-keygen 生成密钥，并将密钥加入到授权中：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">exit</span>                                   <span class="comment"># 退出刚才的 ssh localhost</span></span><br><span class="line">cd ~<span class="regexp">/.ssh/</span>                             <span class="comment"># 若没有该目录，请先执行一次ssh localhost</span></span><br><span class="line">ssh-keygen -t rsa                      <span class="comment"># 会有提示，都按回车就可以</span></span><br><span class="line">cat .<span class="regexp">/id_rsa.pub &gt;&gt; ./</span>authorized_keys  <span class="comment"># 加入授权</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>安装JAVA环境 </p>
-</blockquote>
-<p>此处安装jdk的Java环境\<br><em>ps: OpenJDK安装不成功</em></p>
-<ul>
-<li><p>下载jdk压缩包 \</p>
-<p>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">JDK下载地址</a></p>
-</li>
-<li><p>解压压缩包并移动</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxf jdk-<span class="number">8</span>u161-linux-x64.tar.gz <span class="comment">#解压</span></span><br><span class="line"></span><br><span class="line">sudo mv jdk1.<span class="number">8.0</span>_161<span class="regexp">/ /u</span>sr<span class="regexp">/local/</span>java <span class="comment">#移动压缩包</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置环境变量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sudo</span> vim ~/.bashrc</span><br><span class="line"></span><br><span class="line">//在.bashrc文件中添加环境变量</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre  </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib  </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">//刷新变量文件</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$JAVA_HOME</span>     <span class="comment"># 检验变量值</span></span><br><span class="line">java -version</span><br><span class="line"><span class="variable">$JAVA_HOME</span>/bin/java -version  <span class="comment"># 与直接执行 java -version 一样</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 Hadoop 2\<br>下载稳点版本的hadoop,<a href="http://mirrors.cnnic.cn/apache/hadoop/common/" target="_blank" rel="noopener">hadoop下载地址</a></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxf ~/下载/hadoop-2.6.0.tar.gz    <span class="comment">#解压</span></span><br><span class="line">sudo mv hadoop-2.9.0 /usr/<span class="built_in">local</span>/hadoop  <span class="comment"># 将文件夹名改为hadoop</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/</span><br><span class="line">sudo chown -R hadoop ./hadoop               <span class="comment"># 修改文件权限</span></span><br><span class="line"><span class="comment"># 添加环境变量</span></span><br><span class="line"><span class="comment"># set hadoop enviroment</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;HADOOP_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_CONF_DIR=<span class="variable">$HADOOP_HOME</span>/etc/hadoop</span><br><span class="line"><span class="built_in">export</span> YARN_CONF_DIR=<span class="variable">$HADOOP_HOME</span>/etc/hadoop</span><br></pre></td></tr></table></figure>
-<p>  Hadoop 解压后即可使用。输入如下命令来检查 Hadoop 是否可用，成功则会显示 Hadoop 版本信息：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/usr/local/hadoop</span></span><br><span class="line"><span class="string">./bin/hadoop</span> <span class="keyword">version</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><p>配置Hadoop伪分布模式</p>
-<p>Hadoop 的配置文件位于 /usr/local/hadoop/etc/hadoop/ 中，伪分布式需要修改2个配置文件 core-site.xml 和 hdfs-site.xml 。Hadoop的配置文件是 xml 格式，每个配置以声明 property 的 name 和 value 的方式来实现。修改配置文件 core-site.xml (通过 gedit 编辑会比较方便: gedit ./etc/hadoop/core-site.xml)，将当中的<configuration> </configuration>修改为下面配置：</p>
-</li>
-</ul>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="params">&lt;configuration&gt;</span></span><br><span class="line">   <span class="params">&lt;property&gt;</span></span><br><span class="line">        <span class="params">&lt;name&gt;</span>hadoop.tmp.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">        <span class="params">&lt;value&gt;</span>file:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hadoop/</span>tmp<span class="params">&lt;/value&gt;</span></span><br><span class="line">        <span class="params">&lt;description&gt;</span>Abase for other temporary directories.<span class="params">&lt;/description&gt;</span></span><br><span class="line">   <span class="params">&lt;/property&gt;</span></span><br><span class="line">   <span class="params">&lt;property&gt;</span></span><br><span class="line">        <span class="params">&lt;name&gt;</span>fs.defaultFS<span class="params">&lt;/name&gt;</span></span><br><span class="line">        <span class="params">&lt;value&gt;</span>hdfs:<span class="comment">//IP:9000&lt;/value&gt;</span></span><br><span class="line">   <span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
-<p>  同样的，修改配置文件 hdfs-site.xml：</p>
- <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;configuration&gt;</span></span><br><span class="line">	<span class="params">&lt;property&gt;</span></span><br><span class="line">	 	<span class="params">&lt;name&gt;</span>dfs.replication<span class="params">&lt;/name&gt;</span></span><br><span class="line">	 	<span class="params">&lt;value&gt;</span><span class="number">1</span><span class="params">&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line">	<span class="params">&lt;property&gt;</span></span><br><span class="line">	 	<span class="params">&lt;name&gt;</span>dfs.namenode.name.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">	 	<span class="params">&lt;value&gt;</span>file:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hadoop/</span>tmp<span class="meta-keyword">/dfs/</span>name<span class="params">&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line">	<span class="params">&lt;property&gt;</span></span><br><span class="line">	 	<span class="params">&lt;name&gt;</span>dfs.datanode.data.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">		 <span class="params">&lt;value&gt;</span>file:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hadoop/</span>tmp<span class="meta-keyword">/dfs/</span>data<span class="params">&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
-<p>  配置完成后，执行 NameNode 的格式化:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./<span class="keyword">bin/hdfs </span>namenode -format</span><br></pre></td></tr></table></figure></p>
-<p>  成功的话，会看到 “successfully formatted” 和 “Exitting with status 0” 的提示，若为 “Exitting with status 1” 则是出错。<br>  <img src="http://cdn.powerxing.com/imgs/install-hadoop-14-namenode-format.png" alt="image"></p>
-<p>  接着开启 NameNode 和 DataNode 守护进程</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.<span class="regexp">/sbin/</span>start-dfs.sh</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Hadoop安装完后，启动时报Error: JAVA_HOME is not set and could not be found.<br>解决办法：修改/etc/hadoop/hadoop-env.sh中设JAVA_HOME。应当使用绝对路径。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JAVA_HOME=$JAVA_HOME             <span class="comment">//错误，不能这么改</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> JAVA_HOME=<span class="regexp">/usr/</span>java/jdk1<span class="number">.6</span><span class="number">.0</span>_45  <span class="comment">//正确，应该这么改</span></span><br></pre></td></tr></table></figure>
-<p>启动完成后，可以通过命令 jps 来判断是否成功启动，若成功启动则会列出如下进程: “NameNode”、”DataNode” 和 “SecondaryNameNode”（如果 SecondaryNameNode 没有启动，请运行 sbin/stop-dfs.sh 关闭进程，然后再次尝试启动尝试）。如果没有 NameNode 或 DataNode ，那就是配置不成功，请仔细检查之前步骤，或通过查看启动日志排查原因。</p>
-<p>成功启动后，可以访问 Web 界面 <a href="http://localhost:50070" target="_blank" rel="noopener">http://localhost:50070</a> 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。<br><img src="http://cdn.powerxing.com/imgs/install-hadoop-17-web-ui.png" alt="image"></p>
-<ul>
-<li>启动YARN</li>
-</ul>
-<p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。YARN 运行于 MapReduce 之上，提供了高可用性、高扩展性，YARN 的更多介绍在此不展开，有兴趣的可查阅相关资料。</p>
-<p>上述通过 ./sbin/start-dfs.sh 启动 Hadoop，仅仅是启动了 MapReduce 环境，我们可以启动 YARN ，让 YARN 来负责资源管理与任务调度。</p>
-<p>首先修改配置文件 mapred-site.xml，这边需要先进行重命名：</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mv .<span class="meta-keyword">/etc/</span>hadoop/mapred-site.xml.template .<span class="meta-keyword">/etc/</span>hadoop/mapred-site.xml</span><br><span class="line">gedit .<span class="meta-keyword">/etc/</span>hadoop/mapred-site.xml</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加配置信息</span></span><br><span class="line"><span class="params">&lt;configuration&gt;</span></span><br><span class="line">        <span class="params">&lt;property&gt;</span></span><br><span class="line">             <span class="params">&lt;name&gt;</span>mapreduce.framework.name<span class="params">&lt;/name&gt;</span></span><br><span class="line">             <span class="params">&lt;value&gt;</span>yarn<span class="params">&lt;/value&gt;</span></span><br><span class="line">        <span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//接着修改配置文件 yarn-site.xml：</span></span><br><span class="line"><span class="params">&lt;configuration&gt;</span></span><br><span class="line">        <span class="params">&lt;property&gt;</span></span><br><span class="line">             <span class="params">&lt;name&gt;</span>yarn.nodemanager.aux-services<span class="params">&lt;/name&gt;</span></span><br><span class="line">             <span class="params">&lt;value&gt;</span>mapreduce_shuffle<span class="params">&lt;/value&gt;</span></span><br><span class="line">            <span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
-<p>增加以上信息在  yarn-site.xml to enable log aggregation.</p>
-<p>yarn是用管理job的调度，然后这个地方需要手动的去开启才可以看到。否则使用sqoop导入数据将会报错。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">property</span>&gt;    </span><br><span class="line">    &lt;<span class="built_in">name</span>&gt;yarn.<span class="built_in">log</span>-aggregation-enable&lt;/<span class="built_in">name</span>&gt;    </span><br><span class="line">    &lt;value&gt;<span class="literal">true</span>&lt;/value&gt;    </span><br><span class="line">&lt;/<span class="keyword">property</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>然后就可以启动 YARN 了（需要先执行过 ./sbin/start-dfs.sh）：</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="meta-keyword">/sbin/</span>start-yarn.sh      <span class="meta"># 启动YARN</span></span><br><span class="line">.<span class="meta-keyword">/sbin/</span>mr-jobhistory-daemon.sh start historyserver  <span class="meta"># 开启历史服务器，才能在Web中查看任务运行情况</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//localhost:8088/cluster</span></span><br></pre></td></tr></table></figure>
-<p>开启后通过 jps 查看，可以看到多了 NodeManager 和 ResourceManager 两个后台进程，如下图所示。<br><img src="http://cdn.powerxing.com/imgs/install-hadoop-19-start-yarn.png" alt="image"></p>
-<h2 id="3-配置hive，参考Hive"><a href="#3-配置hive，参考Hive" class="headerlink" title="3.配置hive，参考Hive"></a>3.配置hive，参考<a href="http://blog.csdn.net/u013412497/article/details/54914823" target="_blank" rel="noopener">Hive</a></h2><p>安装mysql<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. sudo apt-get <span class="keyword">install</span> mysql-<span class="keyword">server</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> mysql-<span class="keyword">client</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> libmysqlclient-dev</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span>安装完成之后可以使用如下命令来检查是否安装成功：</span><br><span class="line">sudo netstat -tap | grep mysql</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span>登陆mysql数据库可以通过如下命令：</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></p>
-<p>下载Hive<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="regexp">//mi</span>rror.bit.edu.cn<span class="regexp">/apache/</span>hive<span class="regexp">/hive-2.1.1/</span>apache-hive-<span class="number">2.1</span>.<span class="number">1</span>-bin.tar.gz </span><br><span class="line"></span><br><span class="line"> tar -zxvf apache-hive-<span class="number">2.1</span>.<span class="number">1</span>-bin.tar.gz </span><br><span class="line"></span><br><span class="line">sudo mv apache-hive-<span class="number">2.1</span>.<span class="number">1</span>-bin <span class="regexp">/usr/</span>local<span class="regexp">/hive</span></span><br></pre></td></tr></table></figure></p>
-<p>配置环境变量(同上)<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_HOME</span>=/usr/local/hive</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_CONF_DIR</span>=<span class="variable">$HIVE_HOME</span>/conf</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HCAT_HOME</span>=<span class="variable">$HIVE_HOME</span>/hcatalog</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_CONF</span>=<span class="variable">$HIVE_HOME</span>/conf</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$&#123;HIVE_HOME&#125;</span>/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>在hive的目录下，新建warehouse、tmp、log文件夹。<br>修改配置文件hive/conf<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp hive-env<span class="selector-class">.sh</span><span class="selector-class">.template</span> hive-env<span class="selector-class">.sh</span> </span><br><span class="line">cp hive-log4j2<span class="selector-class">.properties</span><span class="selector-class">.template</span> hive-log4j2<span class="selector-class">.properties</span> </span><br><span class="line">cp hive-default<span class="selector-class">.xml</span><span class="selector-class">.template</span> hive-site.xml</span><br></pre></td></tr></table></figure></p>
-<p>修改hive-env.sh，查找一下字段并去掉前面的注释#，加上相应的路径<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_HEAPSIZE</span>=1024</span><br><span class="line"><span class="attribute">HADOOP_HOME</span>=/usr/local/hadoop</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_CONF_DIR</span>=/usr/local/hive/conf</span><br></pre></td></tr></table></figure></p>
-<p>这儿采用mysql作为hive的元数据库<br>在自己的mysql中为hive新建一个用户<br>mysql数据库创建Hive用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;CREATE USER &apos;hive&apos; IDENTIFIED BY &apos;hive&apos;;</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO &apos;hive&apos;@&apos;%&apos; WITH GRANT OPTION;</span><br><span class="line">mysql&gt;flush privileges;</span><br></pre></td></tr></table></figure>
-<p>修改hive-site.xml文件，添加相应的路径和mysql数据库，用户名，密码</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>hive.metastore.warehouse.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hive/</span>warehouse<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>location of default database for the warehouse<span class="params">&lt;/description&gt;</span></span><br><span class="line"> <span class="params">&lt;/property&gt;</span></span><br><span class="line"> <span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>hive.querylog.location<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hive/</span>log<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>Location of Hive run time structured log file<span class="params">&lt;/description&gt;</span></span><br><span class="line"> <span class="params">&lt;/property&gt;</span></span><br><span class="line"> <span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>hive.downloaded.resources.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hive/</span>tmp<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>Temporary local directory for added resources in the remote file system.<span class="params">&lt;/description&gt;</span></span><br><span class="line"> <span class="params">&lt;/property&gt;</span></span><br><span class="line"> <span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionURL<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span>jdbc:mysql:<span class="comment">//localhost:3306/hive&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span></span><br><span class="line">      JDBC connect string for a JDBC metastore.</span><br><span class="line">      To use SSL to encrypt/authenticate the connection, provide database-specific SSL flag in the connection URL.</span><br><span class="line">      For example, jdbc:postgresql:<span class="comment">//myhost/db?ssl=true for postgres database.</span></span><br><span class="line">    <span class="params">&lt;/description&gt;</span></span><br><span class="line">  <span class="params">&lt;/property&gt;</span></span><br><span class="line">  <span class="params">&lt;property&gt;</span></span><br><span class="line"><span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionDriverName<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span>com.mysql.jdbc.Driver<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>Driver class name for a JDBC metastore<span class="params">&lt;/description&gt;</span></span><br><span class="line">  <span class="params">&lt;/property&gt;</span></span><br><span class="line"> <span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionUserName<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span>hive<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>Username to use against metastore database<span class="params">&lt;/description&gt;</span></span><br><span class="line">  <span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionPassword<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span>hive<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>password to use against metastore database<span class="params">&lt;/description&gt;</span></span><br><span class="line">  <span class="params">&lt;/property&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>下载mysql-connector-java\</p>
-<p>地址：<a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/connector/j/</a> \<br>解压得到mysql-connector-java-5.1.40.jar,拷贝到hive的lib目录下。</p>
-</li>
-<li><p>登陆MySQL创建hive数据库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database hive;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show databases</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在进入hive目录下的bin目录，运行命令：./schematool -initSchema -dbType mysql<br>现在hive已经安装成功，输入hive命令，即可运行hive</p>
-</li>
-</ul>
-<blockquote>
-<p>如果此时出现这个错误Exception in thread “main” java.lang.IllegalArgumentException: java.net.URISyntaxException: Relative path in absolute URI: ${system:java.io.tmpdir%7D/$%7Bsystem:user.name%7D</p>
-</blockquote>
-<p>解决方案如下：</p>
-<p>在hive 配置文件hive-site.xml 中找到${system:java.io.tmpdir}，并把此都替换成具体目录，如/usr/local/hive/iotmp</p>
-<p>Kylin用 HCatalog 读取Hive表的，而HCatalog用 property hive.metastore.uris 创建HiveMetaStoreClient 得到元信息。因此，我们还需修改hive-site.xml：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&lt;property&gt;</span></span><br><span class="line">  <span class="symbol">&lt;name&gt;</span>hive.metastore.uris&lt;/name&gt;</span><br><span class="line">  <span class="symbol">&lt;value&gt;</span>thrif<span class="variable">t:</span>//localhos<span class="variable">t:9083</span>&lt;/value&gt;</span><br><span class="line">  <span class="symbol">&lt;description&gt;</span>Thrift URI <span class="keyword">for</span> the remote metastore. Used by metastore client <span class="keyword">to</span> connect <span class="keyword">to</span> remote metastore.&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure></p>
-<p>开启metastore 服务：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup hive --service metastore -<span class="selector-tag">p</span> <span class="number">9083</span> &amp;</span><br></pre></td></tr></table></figure></p>
-<h2 id="4-Hbase部署"><a href="#4-Hbase部署" class="headerlink" title="4.Hbase部署"></a>4.Hbase部署</h2><ul>
-<li>下载文档版本的Hbanse,<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/" target="_blank" rel="noopener">下载地址</a></li>
-<li>解压并配置相关环境变量<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hbase-1.2.6-bin.tar.gz</span><br><span class="line">sudo mv hbase-1.2.6 /usr/local/hbase</span><br><span class="line">sudo vim ~/.bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_HOME</span>=/usr/local/hbase</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$HIVE_HOME/bin:$HBASE_HOME/bin</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="伪分布部署："><a href="#伪分布部署：" class="headerlink" title="伪分布部署："></a>伪分布部署：</h4><p>伪分布模式需要用到hadoop文件系统 ，所以配置会比单机模式麻烦很多 并且需要版本匹配；</p>
-<ol>
-<li><p>修改conf/hbase-env.sh </p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加java环境变量和hbase_classpath(指向hadoop的配置文件目录)</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/local/java</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过hadoop的配置文件找到hadoop集群</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_CLASSPATH</span>=/usr/local/hadoop/etc/hadoop</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用HBASE自带的zookeeper管理集群</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_MANAGES_ZK</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑hbase-site.xml</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;configuration&gt;</span></span><br><span class="line">    <span class="params">&lt;property&gt;</span></span><br><span class="line">		<span class="params">&lt;name&gt;</span>hbase.rootdir<span class="params">&lt;/name&gt;</span></span><br><span class="line">		<span class="params">&lt;value&gt;</span>hdfs:<span class="comment">//hadoopIp:9000/hbase&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line">	<span class="params">&lt;property&gt;</span></span><br><span class="line">		<span class="params">&lt;name&gt;</span>hbase.cluster.distributed<span class="params">&lt;/name&gt;</span></span><br><span class="line">		<span class="params">&lt;value&gt;</span>true<span class="params">&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line">	<span class="params">&lt;property&gt;</span></span><br><span class="line">		<span class="params">&lt;name&gt;</span>hbase.zookeeper.property.dataDir<span class="params">&lt;/name&gt;</span></span><br><span class="line">		<span class="params">&lt;value&gt;</span><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/hbase/</span>zookeeper<span class="params">&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line">	<span class="params">&lt;property&gt;</span></span><br><span class="line">		<span class="params">&lt;name&gt;</span>hbase.zookeeper.quorum<span class="params">&lt;/name&gt;</span></span><br><span class="line">		<span class="params">&lt;value&gt;</span>hadoopIp<span class="params">&lt;/value&gt;</span></span><br><span class="line">	<span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>进入bin目录以root权限开启HBase服务：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 注意在开启hbase服务之前，一定要运行一下sudo chown -R hadoop ./hbase</span></span><br><span class="line">./start-hbase.sh</span><br><span class="line"><span class="meta">#</span><span class="bash">访问http://172.60.20.12:16010/master-status 地址即可查看Hbase的配置信息</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="5-部署Kylin"><a href="#5-部署Kylin" class="headerlink" title="5.部署Kylin"></a>5.部署Kylin</h2><ul>
-<li><a href="http://mirror.bit.edu.cn/apache/kylin/apache-kylin-2.1.0/apache-kylin-2.1.0-bin-hbase1x.tar.gz" target="_blank" rel="noopener">软件下载地址</a></li>
-<li>sudo tar -zxf apache-kylin-2.1.0-bin-hbase1x.tar.gz<br>sudo mv apache-kylin-2.1.0-bin-hbase1x /usr/local/kylin</li>
-</ul>
-<p>配置~/.bashrc文件，添加如下环境变量，并生效。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> KYLIN_HOME=/usr/<span class="built_in">local</span>/kylin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> hive_dependency=<span class="variable">$HIVE_HOME</span>/conf:<span class="variable">$HIVE_HOME</span>/lib/*:<span class="variable">$HCAT_HOME</span>/share/hcatalog/hive-hcatalog-core-1.2.2.jar</span><br><span class="line"></span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin:<span class="variable">$ZOOKEEPER_HOME</span>/bin</span><br><span class="line"></span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HBASE_HOME</span>/bin:<span class="variable">$FLUME_HOME</span>/bin:<span class="variable">$HIVE_HOME</span>/bin:<span class="variable">$HCAT_HOME</span>/bin</span><br><span class="line"></span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$CATALINA_HOME</span>/bin:<span class="variable">$KYLIN_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH</span><br></pre></td></tr></table></figure></p>
-<p>修改kylin.properties配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改</span></span><br><span class="line"></span><br><span class="line">kylin.server.cluster-servers=192.168.1.201:7070</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加配置</span></span><br><span class="line"></span><br><span class="line">kylin.job.jar=/usr/<span class="built_in">local</span>/apps/kylin/lib/kylin-job-2.1.0.jar</span><br><span class="line"></span><br><span class="line">kylin.coprocessor.local.jar=/usr/<span class="built_in">local</span>/apps/kylin/lib/kylin-coprocessor-2.1.0.jar</span><br><span class="line"></span><br><span class="line">kylin.job.yarn.app.rest.check.status.url=http://192.168.1.202:8088/ws/v1/cluster/apps/<span class="variable">$&#123;job_id&#125;</span>?anonymous=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>注意：kylin 本身有bug，安装成功之后会关联不到hive/lib 需要修改kylin.sh 文件。<br>查找HBASE_CLASSPATH_PREFIX行，并修改为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HBASE_CLASSPATH_PREFIX=<span class="variable">$&#123;KYLIN_HOME&#125;</span>/conf:<span class="variable">$&#123;KYLIN_HOME&#125;</span>/lib/*:<span class="variable">$&#123;KYLIN_HOME&#125;</span>/ext/*:<span class="variable">$&#123;hive_dependency&#125;</span>:<span class="variable">$&#123;HBASE_CLASSPATH_PREFIX&#125;</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="注意：-关闭ssl认证和gzip"><a href="#注意：-关闭ssl认证和gzip" class="headerlink" title="注意： 关闭ssl认证和gzip."></a>注意： 关闭ssl认证和gzip.</h1>
+<a id="more"></a>
+<h2 id="frp-下载地址"><a href="#frp-下载地址" class="headerlink" title="frp 下载地址"></a>frp 下载地址</h2><p>可根据需要从<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">github</a>上下载对应操作系统的程序（当前最新版本为v0.16.0）。<br><em>注：frps及frps.ini分别为服务器端程序和其配置文件。个人使用只需要frpc以及frpc.ini配置文件即可。</em></p>
+<h3 id="frpc-ini-配置文件使用说明"><a href="#frpc-ini-配置文件使用说明" class="headerlink" title="frpc.ini 配置文件使用说明"></a>frpc.ini 配置文件使用说明</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 公共设置</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># 服务器相关配置（必填）</span></span><br><span class="line"><span class="attr">server_addr</span> = XXX.shunnengnet.com</span><br><span class="line"><span class="attr">server_port</span> = <span class="number">7000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要配置http代理时可配置此项（可选）</span></span><br><span class="line"><span class="comment">#  http_proxy = http://user:pwd@192.168.1.128:8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置日志输出文件位置（可选）</span></span><br><span class="line"><span class="comment"># log_file = ./frpc.log</span></span><br><span class="line"><span class="comment"># 日志等级：trace, debug, info, warn, error</span></span><br><span class="line"><span class="comment"># log_level = info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 身份验证密钥（必填）</span></span><br><span class="line"><span class="attr">privilege_token</span> = U2FsdGkX+R4/uV+bnrBJiJzmN9P9nBcAf8= #随机生成的字符，不可用</span><br><span class="line"></span><br><span class="line"><span class="comment"># frp支持热加载配置文件，当修改了 frpc 中的代理配置，可以通过 frpc reload 命令来动态加载配置文件。（可选）</span></span><br><span class="line"><span class="comment"># 启用此功能需要在 frpc 中启用 admin 端口，用于提供 API 服务。</span></span><br><span class="line"><span class="comment"># 详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###客户端热加载配置文件</span></span><br><span class="line"><span class="comment"># admin_addr = 127.0.0.1</span></span><br><span class="line"><span class="comment"># admin_port = 7400</span></span><br><span class="line"><span class="comment"># admin_user = admin</span></span><br><span class="line"><span class="comment"># admin_pwd = admin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># frp中代理名称不可重复使用，为了方便管理和规范需要配置此项进行区分，建议使用个人名称拼音或简写。（必填）</span></span><br><span class="line"><span class="comment"># 注意，当设置如下配置时，每个代理名称前会自动增加前缀。代理名称将会显示为&#123;your_name&#125;.&#123;proxy_name&#125;</span></span><br><span class="line"><span class="attr">user</span> = your_name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为各代理段配置示例</span></span><br><span class="line"><span class="comment"># 客户端可根据需要配置多个代理，使用[proxy_name]配置当前代理名称</span></span><br><span class="line"><span class="comment"># 如：ssh为当前代理配置在服务器中显示的代理名称。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.可使用此方式进行ssh配置，此示例可通过ngrok.shunnengnet.com:6001进行链接。</span></span><br><span class="line"><span class="section">[ssh]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">22</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6001</span></span><br><span class="line"><span class="comment"># 加密和压缩服务</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.范围端口映射，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###范围端口映射</span></span><br><span class="line"><span class="section">[range:tcp_port]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">6010</span>-<span class="number">6020</span>,<span class="number">6022</span>,<span class="number">6024</span>-<span class="number">6028</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6010</span>-<span class="number">6020</span>,<span class="number">6022</span>,<span class="number">6024</span>-<span class="number">6028</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.自定义二级域名访问本地web服务</span></span><br><span class="line"><span class="section">[web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="comment"># 设置二级域名的前缀。</span></span><br><span class="line"><span class="comment"># 服务器默认地址为：XX.shunnengnet.com。</span></span><br><span class="line"><span class="comment"># 当使用如下subdomain配置时，可通过访问web.XXX.shunnengnet.com:8080访问被映射服务器的web应用</span></span><br><span class="line"><span class="attr">subdomain</span> = web</span><br><span class="line"><span class="comment"># 可以通过设置http_user和http_pwd参数给web应用添加身份验证（可选）</span></span><br><span class="line"><span class="comment"># http_user = admin</span></span><br><span class="line"><span class="comment"># http_pwd = admin</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.多级路由，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###url-路由</span></span><br><span class="line"><span class="section">[web01]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = XX.shunnengnet.com</span><br><span class="line"><span class="attr">locations</span> =/</span><br><span class="line"></span><br><span class="line"><span class="section">[web02]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">180</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = XXX.shunnengnet.com</span><br><span class="line"><span class="attr">locations</span> =/web,/news</span><br><span class="line"><span class="comment"># 按照上述的示例配置后，XX.shunnengnet.com 域名下所有以 /web 以及 /news 作为前缀的 URL 请求都会被转发到 web02，其余的请求会被转发到 web01。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.静态资源服务器配置示例，详情请参考：https://github.com/fatedier/frp/blob/master/README_zh.md###对外提供简单的文件访问服务</span></span><br><span class="line"><span class="section">[plugin_static_file]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6006</span></span><br><span class="line"><span class="attr">plugin</span> = static_file</span><br><span class="line"><span class="attr">plugin_local_path</span> = /var/www/blog</span><br><span class="line"><span class="attr">plugin_strip_prefix</span> = static</span><br><span class="line"><span class="attr">plugin_http_user</span> = abc</span><br><span class="line"><span class="attr">plugin_http_passwd</span> = abc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6.统一使用该方法搭建3389连接</span></span><br><span class="line"><span class="comment"># 此方法需要在两台机器上同时配置frpc，详情请见：https://github.com/fatedier/frp/blob/master/README_zh.md###安全地暴露内网服务</span></span><br><span class="line"><span class="comment"># 远程机器（即前置机）的frpc配置文件如下：</span></span><br><span class="line"><span class="section">[remote]</span></span><br><span class="line"><span class="attr">type</span> = stcp</span><br><span class="line"><span class="comment"># 两台远程机器相匹配的身份验证号，可自行配置。保证两台机器具有相同的sk即可。</span></span><br><span class="line"><span class="attr">sk</span> = abcdefg</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">3389</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地机器frpc配置如下</span></span><br><span class="line"><span class="section">[remote_visitor]</span></span><br><span class="line"><span class="attr">role</span> = visitor</span><br><span class="line"><span class="attr">type</span> = stcp</span><br><span class="line"><span class="comment"># 远程连接的代理名称。 </span></span><br><span class="line"><span class="comment"># 注意frp客户端设置user字段后，frp自动增加用户名前缀</span></span><br><span class="line"><span class="comment"># 因此使用此配置连接远程服务器时，该代理自动连接的是&#123;user&#125;.remote映射的远程机器。</span></span><br><span class="line"><span class="comment"># 因此，此配置项只需与远程机器（即前置机）上配置的代理名称相匹配即可。</span></span><br><span class="line"><span class="attr">server_name</span> = remote</span><br><span class="line"><span class="comment"># 两台远程机器相匹配的身份验证号，可自行配置。保证两台机器具有相同的sk即可。</span></span><br><span class="line"><span class="attr">sk</span> = abcdefg</span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">9000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>其他功能详情请参考<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">github</a></p>
+
       
 
       
@@ -305,19 +199,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hive</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">frp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hadopp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hbase</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">kylin</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">远程连接</a>
         		</li>
       		
 		</ul>
@@ -373,7 +259,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://killer.me/2018/03/15/搭建hadopp+Kylin服务器环境/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://killer.me/2018/03/11/frpConfig/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -387,7 +273,7 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/03/15/使用pentaho+sqoop进行数据更新的实施方案/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/12/使用pentaho+sqoop进行数据更新的实施方案/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -397,8 +283,8 @@ var _hmt = _hmt || [];
     </a>
   
   
-    <a href="/2018/03/15/将frpc注册为windows服务/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">注册frpc为windows服务</div>
+    <a href="/2018/03/10/cwRsync配置说明/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cwRsync 配置说明</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -425,7 +311,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-创建hadoop用户"><span class="toc-number">1.</span> <span class="toc-text">1.创建hadoop用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-搭建hadoop服务器"><span class="toc-number">2.</span> <span class="toc-text">2.搭建hadoop服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-配置hive，参考Hive"><span class="toc-number">3.</span> <span class="toc-text">3.配置hive，参考Hive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Hbase部署"><span class="toc-number">4.</span> <span class="toc-text">4.Hbase部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#伪分布部署："><span class="toc-number">4.0.1.</span> <span class="toc-text">伪分布部署：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-部署Kylin"><span class="toc-number">5.</span> <span class="toc-text">5.部署Kylin</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意：-关闭ssl认证和gzip"><span class="toc-number"></span> <span class="toc-text">注意： 关闭ssl认证和gzip.</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#frp-下载地址"><span class="toc-number">1.</span> <span class="toc-text">frp 下载地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#frpc-ini-配置文件使用说明"><span class="toc-number">1.1.</span> <span class="toc-text">frpc.ini 配置文件使用说明</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -441,7 +327,7 @@ var _hmt = _hmt || [];
   
 
   
-  <div id="SOHUCS" sid="搭建hadopp+Kylin服务器环境" ></div> 
+  <div id="SOHUCS" sid="frpConfig" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -481,7 +367,7 @@ var _hmt = _hmt || [];
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: ,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -505,6 +391,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+      
+      
     
       
       
@@ -516,13 +404,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友情连接</a></li>
+      
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -559,6 +449,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">frp</a>
               </li>
              
@@ -567,11 +465,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">远程机器配置同步</a>
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,14 +482,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>
@@ -637,6 +527,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://juejin.im/user/58748572b123db4a2eccd3e0" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>掘金</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com/u/1daa5424ab2e" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://jh.jiankangsn.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>jhipster开发笔记</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://jhipster.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>jhipster</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     
