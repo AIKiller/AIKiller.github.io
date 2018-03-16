@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Killer的博客">
 <meta property="og:description" content="公司使用echarts显示预约、支付、就诊人数量统计等报表信息。但传统的java读取数据的方法不仅加载缓慢，并且极易造成MySQL数据库I/O读写卡死。因此，将显示方案调整为前台直接调用KYLIN的Rest API的方式，加快图表的显示功能。为了实现数据增量更新，需要将公司在MySQL数据库上的数据同步到Hadoop文件系统中，因此建立此方案解决增量更新的问题。">
 <meta property="og:image" content="//killer.me/img/513841-20160812102124078-171184924.png">
-<meta property="og:updated_time" content="2018-03-16T00:07:19.138Z">
+<meta property="og:updated_time" content="2018-03-16T00:19:00.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pentaho+sqoop实现mysql到hive的数据增量更新">
 <meta name="twitter:description" content="公司使用echarts显示预约、支付、就诊人数量统计等报表信息。但传统的java读取数据的方法不仅加载缓慢，并且极易造成MySQL数据库I/O读写卡死。因此，将显示方案调整为前台直接调用KYLIN的Rest API的方式，加快图表的显示功能。为了实现数据增量更新，需要将公司在MySQL数据库上的数据同步到Hadoop文件系统中，因此建立此方案解决增量更新的问题。">
@@ -178,32 +178,21 @@
 <li>appointment_micro_db.appoint （预约）</li>
 <li>alihosdb.alipay_user （注册）</li>
 <li>udb_micro_db.attention（关注量）</li>
-<li>pay_micro_db.pay_micro_db（支付）<h3 id="方案流程："><a href="#方案流程：" class="headerlink" title="方案流程："></a>方案流程：</h3></li>
+<li>pay_micro_db.pay_micro_db（支付）</li>
 </ul>
-<ol>
-<li><p>使用pentaho读取mysql的增量信息进行清洗并存放到mysql的中间缓存数据（db_snanalytics）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pentaho job执行任务可使用命令行运行，如 </span></span><br><span class="line">Kitchen /file D:F:\shunnengKylin\incremental\incrementalJob.kjb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 因此，可以设置windows任务进行定时操作。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用sqoop的增量导入将数据导入到对应的hadoop数据库中。详细教程请参考<a href="http://blog.csdn.net/ryantotti/article/details/14226635" target="_blank" rel="noopener">sqoop定时增量导入</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import -Dorg.apache.sqoop.splitter.allow_text_splitter=true  --connect jdbc:mysql://XXX.XXX.XXX.XXX:3306/incremental?charset-utf8  --username killer --password XXXXXXX --table incremental_user_auth  --fields-terminated-by "\t" --lines-terminated-by "\n" --target-dir /usr/local/hive/warehouse/pentaho_db.db/fact_user_auth  --hive-table pentaho_db.fact_user_auth --incremental lastmodified  --check-column created_time --last-value "2018-03-13 23:59:59" --merge-key id</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<h3 id="方案流程："><a href="#方案流程：" class="headerlink" title="方案流程："></a>方案流程：</h3><p>1.使用pentaho读取mysql的增量信息进行清洗并存放到mysql的中间缓存数据（db_snanalytics）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pentaho job执行任务可使用命令行运行，如 </span><br><span class="line">Kitchen /file D:F:\shunnengKylin\incremental\incrementalJob.kjb</span><br><span class="line"><span class="meta">#</span> 因此，可以设置windows任务进行定时操作。</span><br></pre></td></tr></table></figure></p>
+<p>2.使用sqoop的增量导入将数据导入到对应的hadoop数据库中。详细教程请参考<a href="http://blog.csdn.net/ryantotti/article/details/14226635" target="_blank" rel="noopener">sqoop定时增量导入</a></p>
 <blockquote>
 <p>lastmodified方式，将时间戳之间的数据更新/添加到新的数据库。<br>缺点：Hive不支持直接增量更新，需要将数据添加到hadoop对应的文件路径中，并设置merge-key字段。<br>可参考：<a href="https://stackoverflow.com/questions/47264844/sqoop-incremental-import-to-hive-table" target="_blank" rel="noopener">sqoop-incremental-import-to-hive-table</a></p>
 </blockquote>
-<p><strong>注意，sqoop导入数据时，将读取数据库的当前时间作为时间最大值。因此，如果源数据库的时区设置有偏差，则会影响sqoop增量更新的时间区间。</strong></p>
-<ol>
-<li><p>设置对应Kylin的自动更新的时间，参考<a href="http://pan.baidu.com/s/1dEV0Rlf" target="_blank" rel="noopener">Apache Kylin权威指南</a>（密码:oww8）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import -Dorg.apache.sqoop.splitter.allow_text_splitter=true  --connect jdbc:mysql://XXX.XXX.XXX.XXX:3306/incremental?charset-utf8  --username killer --password XXXXXXX --table incremental_user_auth  --fields-terminated-by "\t" --lines-terminated-by "\n" --target-dir /usr/local/hive/warehouse/pentaho_db.db/fact_user_auth  --hive-table pentaho_db.fact_user_auth --incremental lastmodified  --check-column created_time --last-value "2018-03-13 23:59:59" --merge-key id</span><br></pre></td></tr></table></figure>
+<p><em>注意，sqoop导入数据时，将读取数据库的当前时间作为时间最大值。因此，如果源数据库的时区设置有偏差，则会影响sqoop增量更新的时间区间。</em></p>
+<p>3.设置对应Kylin的自动更新的时间，参考<a href="http://pan.baidu.com/s/1dEV0Rlf" target="_blank" rel="noopener">Apache Kylin权威指南</a>（密码:oww8）</p>
 <blockquote>
 <p>Auto Merge Time Ranges (days):自动将小段segment合并为大段segment的天数，可设置多级天数。<br>Retention Range (days)：只保留规定时间段的segment，超过改该时间段的历史数据将自动清除。<br>Partition Start Date：分区开始时间。<br>在建立对应model时设置Partition Date Column对应的检查字段和类型</p>
 </blockquote>
-</li>
-<li><p>调用Rest API触发cube自动更新。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 为了使用crontab命令定时执行任务，本方案将此命令写入sh文件。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 所以，时间通过date命令获取并拼接到请求json中。注意json的拼接方式。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意：kylin在调用rebuild接口时，satrtTime和endTime字段的值需要使用linux时间戳的形式并且精确到毫秒。</span></span><br><span class="line">curl -X PUT -H "Authorization: Basic QURNSU46S1lMSU4=" -H "Content-Type:application/json" -d  '&#123;"satrtTime":'"$&#123;startTime_timestamp&#125;"',"endTime":'"$&#123;endTime_timestamp&#125;"',"buildType":"BUILD"&#125;'  http://XXX.XXX.XXX.XXX:7070/kylin/api/cubes/count_appointment_doctor_depart_hos/rebuild</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>crontab命令定时执行同步任务</p>
-</li>
-</ol>
+<p>4.调用Rest API触发cube自动更新。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 为了使用crontab命令定时执行任务，本方案将此命令写入sh文件。</span><br><span class="line"><span class="meta">#</span> 所以，时间通过date命令获取并拼接到请求json中。注意json的拼接方式。</span><br><span class="line"><span class="meta">#</span> 注意：kylin在调用rebuild接口时，satrtTime和endTime字段的值需要使用linux时间戳的形式并且精确到毫秒。</span><br><span class="line">curl -X PUT -H "Authorization: Basic QURNSU46S1lMSU4=" -H "Content-Type:application/json" -d  '&#123;"satrtTime":'"$&#123;startTime_timestamp&#125;"',"endTime":'"$&#123;endTime_timestamp&#125;"',"buildType":"BUILD"&#125;'  http://XXX.XXX.XXX.XXX:7070/kylin/api/cubes/count_appointment_doctor_depart_hos/rebuild</span><br></pre></td></tr></table></figure></p>
+<p>5.crontab命令定时执行同步任务</p>
 <p>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：</p>
 <p>minute hour day month week command</p>
 <p>其中：</p>
@@ -220,9 +209,43 @@
 <p>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</p>
 <p>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</p>
 <blockquote>
-<p>crontab常用命令<a href="https://www.cnblogs.com/intval/p/5763929.html" target="_blank" rel="noopener">详细参考</a><br>| 参数   | description                                                  |<br>| —— | ———————————————————— |<br>| u user | 用来设定某个用户的crontab服务，例如，“-u ixdba”表示设定ixdba用户的crontab服务，此参数一般有root用户来运行。 |<br>| file   | file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。 |<br>| -e     | 编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。 |<br>| -l     | 显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。 |<br>| -r     | 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。 |<br>|-i  |在删除用户的crontab文件时给确认提示。|</p>
+<p>crontab常用命令<a href="https://www.cnblogs.com/intval/p/5763929.html" target="_blank" rel="noopener">详细参考</a></p>
 </blockquote>
-<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">20 0 * * * /home/hadoop/incremental/incremental.sh &gt;&gt; /home/hadoop/incremental/incremental.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 每天晚上12点20分执行incremental.sh 命令，并将结果输出到incremental.txt文件。</span></span><br><span class="line">crontab crontest.cron #注册定时任务</span><br><span class="line">crontab -l #查看本用户已注册的定时任务</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u user</td>
+<td>用来设定某个用户的crontab服务，例如，“-u ixdba”表示设定ixdba用户的crontab服务，此参数一般有root用户来运行。</td>
+</tr>
+<tr>
+<td>file</td>
+<td>file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>在删除用户的crontab文件时给确认提示。</td>
+</tr>
+</tbody>
+</table>
+<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">20 0 * * * /home/hadoop/incremental/incremental.sh &gt;&gt; /home/hadoop/incremental/incremental.txt</span><br><span class="line"><span class="meta">#</span> 每天晚上12点20分执行incremental.sh 命令，并将结果输出到incremental.txt文件。</span><br><span class="line">crontab crontest.cron #注册定时任务</span><br><span class="line">crontab -l #查看本用户已注册的定时任务</span><br></pre></td></tr></table></figure></p>
 <p>本文参考：<br><a href="https://www.cnblogs.com/intval/p/5763929.html" target="_blank" rel="noopener">Linux定时任务Crontab命令详解</a><br><a href="http://blog.csdn.net/ryantotti/article/details/14226635" target="_blank" rel="noopener">sqoop定时增量导入</a><br><a href="http://blog.csdn.net/dst1213/article/details/52195809" target="_blank" rel="noopener">Hive+Sqoop安装部署和使用</a></p>
 
       
@@ -485,14 +508,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cwRsync</a>
               </li>
              
@@ -518,6 +533,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">kylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">frpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">windows服务</a>
               </li>
             
             <div class="clearfix"></div>
