@@ -8,8 +8,8 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh '''/usr/local/maven/bin/mvn install -x
-'''
+        sh '''/usr/local/maven/bin/mvn -x
+/usr/local/maven/bin/mvn install'''
       }
     }
     stage('deploy') {
