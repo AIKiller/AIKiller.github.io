@@ -8,9 +8,8 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh '''git --version
-chmod +x mvnw
-./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
+        sh '''/usr/local/maven/bin/mvn install -x
+'''
       }
     }
     stage('deploy') {
