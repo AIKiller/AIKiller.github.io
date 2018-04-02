@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('fetch source code ') {
       steps {
-        git(credentialsId: '183cd155-ae23-486e-bc99-27f58e720ae5', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
+        git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
       }
     }
     stage('Test') {
