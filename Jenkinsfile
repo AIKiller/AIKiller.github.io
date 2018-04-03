@@ -10,7 +10,7 @@ pipeline {
         }
         stage('use tool predefined') {
           steps {
-            tool 'autoinstall_docker'
+            tool(name: 'autoinstall_docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool')
           }
         }
       }
