@@ -6,7 +6,7 @@ pipeline {
         git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
       }
     }
-    stage('Test') {
+    stage('bulider') {
       steps {
         sh '''docker ps
 chmod +x mvnw
