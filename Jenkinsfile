@@ -9,9 +9,9 @@ pipeline {
     stage('builder') {
       steps {
         tool 'autoinstall_docker'
-        sh '''cd /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/autoinstall_docker/bin
-ls
-/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/autoinstall_docker/bin/docker ps'''
+        sh '''apt-get update
+apt-get -y install docker.io
+docker -v'''
       }
     }
     stage('deplomy') {
