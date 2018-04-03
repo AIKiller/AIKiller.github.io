@@ -2,24 +2,24 @@ pipeline {
   agent any
   stages {
     stage('fetch source code ') {
-      parallel {
-        stage('fetch source code ') {
-          steps {
-            git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
-          }
-        }
-        stage('use tool predefined') {
-          steps {
-            tool(name: 'autoinstall_docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool')
-          }
-        }
+      steps {
+        git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
       }
     }
-    stage('bulider') {
-      steps {
-        sh '''docker ps
+    stage('buliding') {
+      parallel {
+        stage('predefined tool') {
+          steps {
+            tool 'autoinstall_docker'
+          }
+        }
+        stage('builder') {
+          steps {
+            sh '''docker ps
 chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true'''
+          }
+        }
       }
     }
     stage('deploy') {
