@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh '''sudo docker ps
+        sh '''docker ps
 chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true'''
       }
