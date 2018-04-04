@@ -18,11 +18,6 @@ chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
       }
     }
-    stage('deplomy') {
-      steps {
-        sshPublisher(alwaysPublishFromMaster: true)
-      }
-    }
   }
   environment {
     JAVA_HOME = '/usr/local/java'
