@@ -13,9 +13,8 @@ pipeline {
     }
     stage('builder') {
       steps {
-        sh '''export MAVEN_HOME=\'/usr/local/maven\'
-mvn -v 
-mvn clean
+        sh '''/usr/local/maven/bin/mvn -v 
+/usr/local/maven/bin/mvn clean
 echo "distributionUrl=${MVN_URL}" > `pwd`/.mvn/wrapper/maven-wrapper.properties
 echo $PATH
 chmod +x mvnw
