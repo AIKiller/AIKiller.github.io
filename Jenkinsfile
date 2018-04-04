@@ -13,7 +13,9 @@ pipeline {
     }
     stage('builder') {
       steps {
-        sh '''chmod +x mvnw
+        sh '''echo $PATH
+java
+chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
       }
     }
