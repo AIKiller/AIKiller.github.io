@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'linux'
+    }
+    
+  }
   stages {
     stage('fetch source code ') {
       steps {
