@@ -25,4 +25,7 @@ chmod +x mvnw
       }
     }
   }
+  environment {
+    JAVA_HOME = '/usr/local/java'
+  }
 }
