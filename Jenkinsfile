@@ -13,10 +13,8 @@ pipeline {
     }
     stage('builder') {
       steps {
-        tool 'autoinstall_docker'
-        sh '''apt-get update
-apt-get -y install docker.io
-docker -v'''
+        sh '''chmod +x mvnw
+./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
       }
     }
     stage('deplomy') {
