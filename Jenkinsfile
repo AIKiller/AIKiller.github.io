@@ -15,8 +15,6 @@ pipeline {
       steps {
         sh '''/usr/local/maven/bin/mvn -v 
 /usr/local/maven/bin/mvn clean
-echo "distributionUrl=${MVN_URL}" > `pwd`/.mvn/wrapper/maven-wrapper.properties
-echo $PATH
 chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
       }
