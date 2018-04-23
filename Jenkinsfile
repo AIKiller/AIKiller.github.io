@@ -5,6 +5,9 @@ pipeline {
     }
 
   }
+  parameters {
+        string(name: 'build_microservice', defaultValue: 'none', description: '请键入需要构建的微服务名称?')
+   }
   stages {
     stage('pre-prepare') {
       parallel {
