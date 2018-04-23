@@ -6,7 +6,7 @@ pipeline {
 
   }
   parameters {
-        string(name: 'build_microservice', defaultValue: 'none', description: '请键入需要构建的微服务名称?')
+        string(name: 'build_microservice_name', defaultValue: 'none', description: '请键入需要构建的微服务名称?')
    }
   stages {
     stage('pre-prepare') {
@@ -30,11 +30,11 @@ pipeline {
 chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true
 
-docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
-docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}
+docker tag ${build_microservice_name} ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}_${BUILD_ID}_hospital
+docker tag ${build_microservice_name} ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}
 
-docker push ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
-docker push ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}
+docker push ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}_${BUILD_ID}_${build_microservice_name}
+docker push ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}
 
 
 export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
