@@ -49,10 +49,32 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
         RANCHER_ENV_URL = 'http://172.60.30.51:8080/env/1a5/apps/stacks/1st11/services/1s37/containers'
         PRIVATE_TOKEN = 'qGUM7oA3jm5ws3D-69zw'
         CI_COMMIT_REF_NAME = 'master'
+        CI_PROJECT_NAME = 'hospital'
       }
       steps {
-        sh '''wget -q -N -P /tmp/${RANCHER_STACK}_${CHANGE_ID} --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-rancher.yml http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-docker.yml
+        sh '''export IMAGEID=${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
 
+wget -q -N -P /tmp/${RANCHER_STACK}_${BUILD_NUMBER} --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-rancher.yml http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-docker.yml
+
+sed -i "s#\\.${CI_PROJECT_NAME}#${IMAGEID}#g;s#\\.git_hash#${BUILD_NUMBER}#g;s#${CI_PROJECT_NAME}-app#${CI_PROJECT_NAME}-${COMMITHASH}-app#g" /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-docker.yml
+
+sed -i "s#${CI_PROJECT_NAME}-app#${CI_PROJECT_NAME}-${BUILD_NUMBER}-app#g" /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-rancher.yml
+
+
+rancher --url ${RANCHER_HOST}
+              --access-key ${RANCHER_ACCESS_KEY}
+              --secret-key ${RANCHER_SECRET_KEY}
+              --env ${RANCHER_ENV}
+              --wait-state healthy
+              up
+              --stack ${RANCHER_STACK}
+              --force-upgrade
+              --pull
+              --interval 10000
+              --file /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-docker.yml
+              --rancher-file /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-rancher.yml
+              -d
+              ${CI_PROJECT_NAME}-${BUILD_NUMBER}-app
 '''
       }
     }
