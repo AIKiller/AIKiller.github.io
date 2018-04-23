@@ -15,7 +15,7 @@ pipeline {
         }
         stage('login docker registry') {
           steps {
-            sh 'sudo docker login -u ${REGISTRY_LOGIN} -p ${REGISTRY_PASSWORD} ${CI_COMMIT_REF_NAMEREGISTRY_HOST}'
+            sh 'sudo docker login -u ${REGISTRY_LOGIN} -p ${REGISTRY_PASSWORD} ${REGISTRY_HOST}'
           }
         }
       }
@@ -62,6 +62,6 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
     MVN_URL = 'https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip'
     REGISTRY_LOGIN = 'sndzjs@126.com'
     REGISTRY_PASSWORD = 'WUAcCepAdenyeb0'
-    CI_COMMIT_REF_NAMEREGISTRY_HOST = 'registry.cn-qingdao.aliyuncs.com'
+    REGISTRY_HOST = 'registry.cn-qingdao.aliyuncs.com'
   }
 }
