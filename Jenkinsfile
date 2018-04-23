@@ -3,7 +3,7 @@ pipeline {
     node {
       label 'linux'
     }
-    
+
   }
   stages {
     stage('fetch source code ') {
@@ -21,7 +21,7 @@ chmod +x mvnw
     }
     stage('deploy') {
       steps {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'rancher_service_node ', sshCredentials: [encryptedPassphrase: '{AQAAABAAAAAQ5+4ijIjviUKZkS5xGNnspsha4Ue97jmepbEhME5ZOcg=}', key: '', keyPath: '', username: 'root'], transfers: [sshTransfer(excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/usr/local/jenkins', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)], failOnError: true)
+        rancher(service: 'test/hospital', image: 'hospital', confirm: true, environmentId: '1a5558', endpoint: 'http://172.60.30.51:8080/v2-beta', credentialId: '863ce475-8862-4efa-9e01-813ba36e095b', timeout: 10, ports: '80', environments: 'tes')
       }
     }
   }
