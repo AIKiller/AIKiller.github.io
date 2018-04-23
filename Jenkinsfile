@@ -52,7 +52,7 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
         CI_PROJECT_NAME = 'hospital'
       }
       steps {
-        sh '''source /etc/profile
+        sh '''export PATH=/usr/local/rancher:/usr/local/rancher-compose:$PATH
 
 export IMAGEID=${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
 
