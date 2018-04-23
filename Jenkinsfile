@@ -15,7 +15,7 @@ pipeline {
         }
         stage('login docker registry') {
           steps {
-            sh 'sudo docker login -u ${REGISTRY_LOGIN} -p ${REGISTRY_PASSWORD} ${REGISTRY_HOST}'
+            sh 'sudo docker login -u ${REGISTRY_LOGIN} -p ${REGISTRY_PASSWORD} ${CI_COMMIT_REF_NAMEREGISTRY_HOST}'
           }
         }
       }
