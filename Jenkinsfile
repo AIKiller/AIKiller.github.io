@@ -30,14 +30,14 @@ pipeline {
 chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true
 
-docker tag ${params.build_microservice_name} ${REGISTRY_HOST}/jhipster/${params.build_microservice_name}:${BRANCH_NAME}_${BUILD_ID}_hospital
-docker tag ${params.build_microservice_name} ${REGISTRY_HOST}/jhipster/${params.build_microservice_name}:${BRANCH_NAME}
+docker tag ${build_microservice_name} ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}_${BUILD_ID}_${build_microservice_name}
+docker tag ${build_microservice_name} ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}
 
-docker push ${REGISTRY_HOST}/jhipster/${params.build_microservice_name}:${BRANCH_NAME}_${BUILD_ID}_${params.build_microservice_name}
-docker push ${REGISTRY_HOST}/jhipster/${params.build_microservice_name}:${BRANCH_NAME}
+docker push ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}_${BUILD_ID}_${build_microservice_name}
+docker push ${REGISTRY_HOST}/jhipster/${build_microservice_name}:${BRANCH_NAME}
 
 
-export IMAGEID=$(docker images | grep ${params.build_microservice_name}  | awk \'{print $3}\'|sort|uniq)
+export IMAGEID=$(docker images | grep ${build_microservice_name}  | awk \'{print $3}\'|sort|uniq)
 
  if [ -n "$IMAGEID" ];
  then
