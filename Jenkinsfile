@@ -30,6 +30,10 @@ chmod +x mvnw
 docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
 docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}
 
+docker push ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
+docker push ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}
+
+
 export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
 
  if [ -n "$IMAGEID" ];
