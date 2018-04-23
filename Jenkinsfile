@@ -19,12 +19,6 @@ chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
       }
     }
-    stage('deploy') {
-      steps {
-        rancher(service: 'test/hospital', image: 'hospital', confirm: true, environmentId: '1a5', endpoint: 'http://172.60.30.51:8080/v2-beta', credentialId: '863ce475-8862-4efa-9e01-813ba36e095b', timeout: 500, ports: '80', environments: 'tes')
-        sh 'docker-compose -f src/main/docker/app.yml up -d'
-      }
-    }
   }
   environment {
     JAVA_HOME = '/usr/local/java'
