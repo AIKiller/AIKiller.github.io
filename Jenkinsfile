@@ -39,6 +39,11 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
 '''
       }
     }
+    stage('start to deploy') {
+      steps {
+        input 'start to deploy to rancher'
+      }
+    }
   }
   environment {
     JAVA_HOME = '/usr/local/java'
