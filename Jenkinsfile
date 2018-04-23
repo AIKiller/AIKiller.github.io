@@ -52,7 +52,9 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
         CI_PROJECT_NAME = 'hospital'
       }
       steps {
-        sh '''export IMAGEID=${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
+        sh '''source /etc/profile
+
+export IMAGEID=${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hospital
 
 wget -q -N -P /tmp/${RANCHER_STACK}_${BUILD_NUMBER} --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-rancher.yml http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-docker.yml
 
