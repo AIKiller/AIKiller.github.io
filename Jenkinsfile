@@ -44,6 +44,20 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
         input 'start to deploy to rancher'
       }
     }
+    stage('deploy') {
+      environment {
+        RANCHER_ACCESS_KEY = '74443F7F23CA8394BC8D'
+        RANCHER_SECRET_KEY = 'NtgrW94qjr4Yu9snQFXkAsMdsmVBHVpptrNWgu9h'
+        RANCHER_HOST = 'http://172.60.30.51:8080'
+        RANCHER_ENV = 'default'
+        RANCHER_STACK = 'jhipster'
+        RANCHER_ENV_URL = 'http://172.60.30.51:8080/env/1a5/apps/stacks/1st11/services/1s37/containers'
+      }
+      steps {
+        sh '''echo ${env.SVN_REVISION}
+echo ${env}'''
+      }
+    }
   }
   environment {
     JAVA_HOME = '/usr/local/java'
