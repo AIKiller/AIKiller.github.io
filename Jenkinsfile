@@ -58,7 +58,7 @@ export IMAGEID=${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${BUILD_ID}_hos
 
 wget -q -N -P /tmp/${RANCHER_STACK}_${BUILD_NUMBER} --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-rancher.yml http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-docker.yml
 
-sed -i "s#\\.${CI_PROJECT_NAME}#${IMAGEID}#g;s#\\.git_hash#${BUILD_NUMBER}#g;s#${CI_PROJECT_NAME}-app#${CI_PROJECT_NAME}-${COMMITHASH}-app#g" /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-docker.yml
+sed -i "s#\\.${CI_PROJECT_NAME}#${IMAGEID}#g;s#\\.git_hash#${BUILD_NUMBER}#g;s#${CI_PROJECT_NAME}-app#${CI_PROJECT_NAME}-${BUILD_NUMBER}-app#g" /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-docker.yml
 
 sed -i "s#${CI_PROJECT_NAME}-app#${CI_PROJECT_NAME}-${BUILD_NUMBER}-app#g" /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-rancher.yml
 
