@@ -54,8 +54,7 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
         RANCHER_ENV_URL = 'http://172.60.30.51:8080/env/1a5/apps/stacks/1st11/services/1s37/containers'
       }
       steps {
-        sh '''echo ${env.SVN_REVISION}
-echo ${env}'''
+        sh 'echo ${commit}'
       }
     }
   }
