@@ -47,9 +47,13 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
         RANCHER_ENV = 'default'
         RANCHER_STACK = 'jhipster'
         RANCHER_ENV_URL = 'http://172.60.30.51:8080/env/1a5/apps/stacks/1st11/services/1s37/containers'
+        PRIVATE_TOKEN = 'qGUM7oA3jm5ws3D-69zw'
+        CI_COMMIT_REF_NAME = 'master'
       }
       steps {
-        sh 'echo ${env}'
+        sh '''wget -q -N -P /tmp/${RANCHER_STACK}_${CHANGE_ID} --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-rancher.yml http://git.jiankangsn.com/root/docker-compose/raw/master/jhipster/templates/${CI_COMMIT_REF_NAME}/jhipster-docker.yml
+
+'''
       }
     }
   }
@@ -58,6 +62,6 @@ export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
     MVN_URL = 'https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip'
     REGISTRY_LOGIN = 'sndzjs@126.com'
     REGISTRY_PASSWORD = 'WUAcCepAdenyeb0'
-    REGISTRY_HOST = 'registry.cn-qingdao.aliyuncs.com'
+    CI_COMMIT_REF_NAMEREGISTRY_HOST = 'registry.cn-qingdao.aliyuncs.com'
   }
 }
