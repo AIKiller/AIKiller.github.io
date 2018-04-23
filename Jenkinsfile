@@ -6,14 +6,14 @@ pipeline {
 
   }
   stages {
-    stage('fetch source code ') {
+    stage('pre-prepare') {
       parallel {
         stage('fetch source code ') {
           steps {
             git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
           }
         }
-        stage('') {
+        stage('login docker registry') {
           steps {
             sh 'sudo docker login -u ${REGISTRY_LOGIN} -p ${REGISTRY_PASSWORD} ${REGISTRY_HOST}'
           }
@@ -25,7 +25,18 @@ pipeline {
         sh '''/usr/local/maven/bin/mvn -v 
 /usr/local/maven/bin/mvn clean
 chmod +x mvnw
-./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true'''
+./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true
+
+docker tag hospital ${REGISTRY_HOST}/STACK/hospital:${BRANCH_NAME}_${CHANGE_TITLE}_${CHANGE_ID}
+docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${CHANGE_TITLE}
+
+export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
+
+ if [ -n "$IMAGEID" ];
+ then
+    docker rmi -f $IMAGEID;
+ fi
+'''
       }
     }
   }
