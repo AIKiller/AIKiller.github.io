@@ -37,7 +37,7 @@ docker push ${REGISTRY_HOST}/jhipster/${params.build_microservice_name}:${BRANCH
 docker push ${REGISTRY_HOST}/jhipster/${params.build_microservice_name}:${BRANCH_NAME}
 
 
-export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
+export IMAGEID=$(docker images | grep ${params.build_microservice_name}  | awk \'{print $3}\'|sort|uniq)
 
  if [ -n "$IMAGEID" ];
  then
