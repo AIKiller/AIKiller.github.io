@@ -28,7 +28,7 @@ chmod +x mvnw
 ./mvnw package -Pprod,swagger,zipkin docker:build -s /usr/local/maven/conf/settings.xml  -Dmaven.test.skip=true
 
 docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}_${CHANGE_TITLE}_${BUILD_ID}
-docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${CHANGE_TITLE}
+docker tag hospital ${REGISTRY_HOST}/jhipster/hospital:${BRANCH_NAME}
 
 export IMAGEID=$(docker images | grep hospital  | awk \'{print $3}\'|sort|uniq)
 
