@@ -63,21 +63,7 @@ sed -i "s#\\.${CI_PROJECT_NAME}#${IMAGEID}#g;s#\\.git_hash#${BUILD_NUMBER}#g;s#$
 sed -i "s#${CI_PROJECT_NAME}-app#${CI_PROJECT_NAME}-${BUILD_NUMBER}-app#g" /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-rancher.yml
 
 
-rancher --url ${RANCHER_HOST}
-              --access-key ${RANCHER_ACCESS_KEY}
-              --secret-key ${RANCHER_SECRET_KEY}
-              --env ${RANCHER_ENV}
-              --wait-state healthy
-              up
-              --stack ${RANCHER_STACK}
-              --force-upgrade
-              --pull
-              --interval 10000
-              --file /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-docker.yml
-              --rancher-file /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-rancher.yml
-              -d
-              ${CI_PROJECT_NAME}-${BUILD_NUMBER}-app
-'''
+rancher --url ${RANCHER_HOST}  --access-key ${RANCHER_ACCESS_KEY}  --secret-key ${RANCHER_SECRET_KEY}  --env ${RANCHER_ENV}  --wait-state healthy  up   --stack ${RANCHER_STACK}  --force-upgrade  --pull   --interval 10000  --file /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-docker.yml  --rancher-file /tmp/${RANCHER_STACK}_${BUILD_NUMBER}/jhipster-rancher.yml -d  ${CI_PROJECT_NAME}-${BUILD_NUMBER}-app '''
       }
     }
   }
