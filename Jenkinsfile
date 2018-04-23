@@ -7,8 +7,17 @@ pipeline {
   }
   stages {
     stage('fetch source code ') {
-      steps {
-        git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
+      parallel {
+        stage('fetch source code ') {
+          steps {
+            git(credentialsId: 'd903f52f-a5f3-4e42-9212-158ebf0069fe', url: 'http://git.jiankangsn.com/root/hospital.git', branch: 'dev')
+          }
+        }
+        stage('') {
+          steps {
+            sh 'sudo docker login -u ${REGISTRY_LOGIN} -p ${REGISTRY_PASSWORD} ${REGISTRY_HOST}'
+          }
+        }
       }
     }
     stage('builder') {
@@ -23,5 +32,8 @@ chmod +x mvnw
   environment {
     JAVA_HOME = '/usr/local/java'
     MVN_URL = 'https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip'
+    REGISTRY_LOGIN = 'sndzjs@126.com'
+    REGISTRY_PASSWORD = 'WUAcCepAdenyeb0'
+    REGISTRY_HOST = 'registry.cn-qingdao.aliyuncs.com'
   }
 }
