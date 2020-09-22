@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-es集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/22/es%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2020-09-22T14:37:46.000Z" itemprop="datePublished">2020-09-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/22/es%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">es 集群搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>本文章的目的是快速搭建一个高可用的es集群，本方案基于docker环境实现，本着快速、便捷、高可用的目的来搭建。</p>
+<h2 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h2><h3 id="2-1-集群（-cluster-）"><a href="#2-1-集群（-cluster-）" class="headerlink" title="2.1 集群（ cluster ）"></a>2.1 集群（ cluster ）</h3><p>集群是由一个或者多个拥有相同 cluster.name 配置的节点组成，共同承担数据和负载压力，当节点数量发生变化时集群将会重新平均分布所有数据。</p>
+<h3 id="2-2-节点（-node-）"><a href="#2-2-节点（-node-）" class="headerlink" title="2.2 节点（ node ）"></a>2.2 节点（ node ）</h3><p>一个运行中的 ES 实例称为一个节点</p>
+<p>主节点负责管理集群范围内的所有变更，例如增加/删除索引，或者增加/删除节点等，且不需要涉及到文档级别的变更和搜索等操作<br>任何节点都能成为主节点<br>当集群只有一个主节点，即使流量增加也不会成为瓶颈</p>
+<h3 id="2-3-索引（-index-）"><a href="#2-3-索引（-index-）" class="headerlink" title="2.3 索引（ index ）"></a>2.3 索引（ index ）</h3><p>名词；类似于传统关系数据库中的一个数据库<br>动词；索引一个文档就是存储一个文档到一个索引(名词)中以便它可以被检索和查询到。类似于 SQL 语句中的 INSERT 关键词<br>倒排索引；类似于传统关系型数据库中的索引概念，可以提升数据检索速度</p>
+<h3 id="2-4-类型（-type-）"><a href="#2-4-类型（-type-）" class="headerlink" title="2.4 类型（ type ）"></a>2.4 类型（ type ）</h3><p>一个索引包含一个或多个 type ，相当于传统关系型数据库中的表</p>
+<h3 id="2-5-文档（-document-）"><a href="#2-5-文档（-document-）" class="headerlink" title="2.5 文档（ document ）"></a>2.5 文档（ document ）</h3><p>相当于传统关系型数据库中的数据行</p>
+<h3 id="2-6-分片（-shards-）"><a href="#2-6-分片（-shards-）" class="headerlink" title="2.6 分片（ shards ）"></a>2.6 分片（ shards ）</h3><p>是一个底层的「工作单元」，仅保存了全部数据的一部分<br>是数据的容器，文档保存在分片内，分片又被分配到集群内的各个节点里<br>当集群规模扩大或者缩小时， ES 会自动的在各节点中迁移分片，使得数据仍然均匀分布在集群里<br>分为「主分片」和「副本分片」<br>在索引建立的时候就已经确定了主分片数，但是副本分片数可以随时修改；默认情况下会被分配「 5 」个主分片和「 1 」份副本（每个主分片拥有一个副本分片）<br>相同主分片的副本分片不会放在同一个节点<br>① 主分片 ( Primary shard )</p>
+<blockquote>
+<p>索引内任意一个文档都归属于一个主分片，所以主分片的数目决定着索引能够保存的最大数据量</p>
+</blockquote>
+<p>② 副本分片（ Replica shard ）</p>
+<blockquote>
+<p>只是一个主分片的拷贝，作为硬件故障时保护数据不丢失的冗余备份，并为搜索和返回文档等读操作提供服务</p>
+</blockquote>
+<h2 id="三、环境搭建"><a href="#三、环境搭建" class="headerlink" title="三、环境搭建"></a>三、环境搭建</h2><p>本文章基于docker环境搭建了三个节点的es集群，注意：此文章不涉及<code>x-pack</code>的破解，需要破解的请另参考</p>
+<h3 id="3-1修改配置文件"><a href="#3-1修改配置文件" class="headerlink" title="3.1修改配置文件"></a>3.1修改配置文件</h3><p>以下配置为es集群中<code>elasticsearch.yml</code>文件的配置信息，注意：<strong>节点名称<code>node.name</code>的值在集群内需要唯一标识，因此需要为每个节点进行单独配置</strong></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 集群名称</span></span><br><span class="line"><span class="attr">cluster.name:</span> <span class="string">es-cluster</span></span><br><span class="line"><span class="comment"># 集群内各节点名称，注意节点名称在集群内需要唯一标识不能重复。</span></span><br><span class="line"><span class="attr">node.name:</span> <span class="string">es-node1</span></span><br><span class="line"><span class="comment"># 监听地址</span></span><br><span class="line"><span class="attr">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="comment"># 监听端口</span></span><br><span class="line"><span class="attr">http.port:</span> <span class="number">9200</span></span><br><span class="line"><span class="comment"># 集群内各节点通信端口</span></span><br><span class="line"><span class="attr">transport.tcp.port:</span> <span class="number">9300</span></span><br><span class="line"><span class="comment"># 跨域访问的配置</span></span><br><span class="line"><span class="attr">http.cors.enabled:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">http.cors.allow-origin:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="comment"># 当前节点是否为候选主节点</span></span><br><span class="line"><span class="attr">node.master:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 当前节点是否存储es索引信息</span></span><br><span class="line"><span class="attr">node.data:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 表示集群最少的master数，如果集群的最少master数据少于指定的数，将无法启动，官方推荐node master数设置为集群数/2+1，我这里三台ES服务器，配置最少需要两台master，整个集群才可正常运行，</span></span><br><span class="line"><span class="attr">discovery.zen.minimum_master_nodes:</span> <span class="number">2</span></span><br><span class="line"><span class="comment"># 设置集群的初始节点列表</span></span><br><span class="line"><span class="attr">discovery.zen.ping.unicast.hosts:</span> [<span class="string">&quot;es-node1:9300&quot;</span>,<span class="string">&quot;es-node2:9300&quot;</span>,<span class="string">&quot;es-node3:9300&quot;</span>]</span><br><span class="line"><span class="comment"># 集群初始主节点名称</span></span><br><span class="line"><span class="attr">cluster.initial_master_nodes:</span> [<span class="string">&quot;es-node1&quot;</span>]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此配置文件中只有<code>node.name</code>的值不相同，可以考虑通过设置docker的环境变量来设置该项的值，避免需要为每个节点配置不同的配置文件。</p>
+</blockquote>
+<h3 id="3-2-docker-compose-yml文件"><a href="#3-2-docker-compose-yml文件" class="headerlink" title="3.2 docker-compose.yml文件"></a>3.2 docker-compose.yml文件</h3><p>创建docker-compose.yml文件，写入如下的配置，需要注意以下几点。</p>
+<ul>
+<li>ela-haproxy 用来做高可用，分发用户的请求数据。</li>
+<li>映射es的/usr/share/elasticsearch/data目录，防止集群重启导致的数据丢失</li>
+<li><code>io.rancher.scheduler.affinity</code>调度策略请根据自己的docker集群设置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">version: &#39;2&#39;</span><br><span class="line">services:</span><br><span class="line">  ela-haproxy:</span><br><span class="line">    image: rancher&#x2F;lb-service-haproxy:v0.9.14</span><br><span class="line">    ports:</span><br><span class="line">    - 19200:19200&#x2F;tcp</span><br><span class="line">    labels:</span><br><span class="line">      io.rancher.container.agent.role: environmentAdmin,agent</span><br><span class="line">      io.rancher.container.agent_service.drain_provider: &#39;true&#39;</span><br><span class="line">      io.rancher.container.create_agent: &#39;true&#39;</span><br><span class="line">  es-node3:</span><br><span class="line">    image: elasticsearch:7.8.1</span><br><span class="line">    stdin_open: true</span><br><span class="line">    volumes:</span><br><span class="line">    - &#x2F;opt&#x2F;riskbell-elk&#x2F;elasticsearch-cluster&#x2F;conf&#x2F;node3&#x2F;elasticsearch.yml:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;config&#x2F;elasticsearch.yml:ro</span><br><span class="line">    - &#x2F;opt&#x2F;riskbell-elk&#x2F;elasticsearch-cluster&#x2F;data&#x2F;node3:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;data</span><br><span class="line">    tty: true</span><br><span class="line">    labels:</span><br><span class="line">      io.rancher.container.pull_image: always</span><br><span class="line">      io.rancher.scheduler.affinity:host_label: hostname&#x3D;pollylab.com</span><br><span class="line">  es-node2:</span><br><span class="line">    image: elasticsearch:7.8.1</span><br><span class="line">    stdin_open: true</span><br><span class="line">    volumes:</span><br><span class="line">    - &#x2F;opt&#x2F;riskbell-elk&#x2F;elasticsearch-cluster&#x2F;conf&#x2F;node3&#x2F;elasticsearch.yml:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;config&#x2F;elasticsearch.yml:ro</span><br><span class="line">    - &#x2F;opt&#x2F;riskbell-elk&#x2F;elasticsearch-cluster&#x2F;data&#x2F;node2:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;data</span><br><span class="line">    tty: true</span><br><span class="line">    labels:</span><br><span class="line">      io.rancher.container.pull_image: always</span><br><span class="line">      io.rancher.scheduler.affinity:host_label: hostname&#x3D;pollylab.com</span><br><span class="line">  es-node1:</span><br><span class="line">    image: elasticsearch:7.8.1</span><br><span class="line">    stdin_open: true</span><br><span class="line">    volumes:</span><br><span class="line">    - &#x2F;opt&#x2F;riskbell-elk&#x2F;elasticsearch-cluster&#x2F;conf&#x2F;node3&#x2F;elasticsearch.yml:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;config&#x2F;elasticsearch.yml:ro</span><br><span class="line">    - &#x2F;opt&#x2F;riskbell-elk&#x2F;elasticsearch-cluster&#x2F;data&#x2F;node1:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;data</span><br><span class="line">    tty: true</span><br><span class="line">    labels:</span><br><span class="line">      io.rancher.container.pull_image: always</span><br><span class="line">      io.rancher.scheduler.affinity:host_label: hostname&#x3D;pollylab.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-rancher-compose-yml文件"><a href="#3-3-rancher-compose-yml文件" class="headerlink" title="3.3 rancher-compose.yml文件"></a>3.3 rancher-compose.yml文件</h3><p>顺便附送上一份rancher-compose.yml文件信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">version: &#39;2&#39;</span><br><span class="line">services:</span><br><span class="line">  ela-haproxy:</span><br><span class="line">    scale: 1</span><br><span class="line">    start_on_create: true</span><br><span class="line">    lb_config:</span><br><span class="line">      certs: []</span><br><span class="line">      port_rules:</span><br><span class="line">      - priority: 1</span><br><span class="line">        protocol: http</span><br><span class="line">        service: es-node1</span><br><span class="line">        source_port: 19200</span><br><span class="line">        target_port: 9200</span><br><span class="line">      - priority: 2</span><br><span class="line">        protocol: http</span><br><span class="line">        service: es-node2</span><br><span class="line">        source_port: 19200</span><br><span class="line">        target_port: 9200</span><br><span class="line">      - priority: 3</span><br><span class="line">        protocol: http</span><br><span class="line">        service: es-node3</span><br><span class="line">        source_port: 19200</span><br><span class="line">        target_port: 9200</span><br><span class="line">    health_check:</span><br><span class="line">      healthy_threshold: 2</span><br><span class="line">      response_timeout: 2000</span><br><span class="line">      port: 42</span><br><span class="line">      unhealthy_threshold: 3</span><br><span class="line">      initializing_timeout: 60000</span><br><span class="line">      interval: 2000</span><br><span class="line">      reinitializing_timeout: 60000</span><br><span class="line">  es-node3:</span><br><span class="line">    scale: 1</span><br><span class="line">    start_on_create: true</span><br><span class="line">  es-node2:</span><br><span class="line">    scale: 1</span><br><span class="line">    start_on_create: true</span><br><span class="line">  es-node1:</span><br><span class="line">    scale: 1</span><br><span class="line">    start_on_create: true</span><br></pre></td></tr></table></figure>
+<h2 id="四、安装elasticsearch-head插件"><a href="#四、安装elasticsearch-head插件" class="headerlink" title="四、安装elasticsearch-head插件"></a>四、安装elasticsearch-head插件</h2><p>elasticsearch-head是一个可视化的es集群管理页面。</p>
+<h3 id="4-1-安装elasticsearch-head为插件"><a href="#4-1-安装elasticsearch-head为插件" class="headerlink" title="4.1 安装elasticsearch-head为插件"></a>4.1 安装elasticsearch-head为插件</h3><ul>
+<li>Elasticsearch 5.x，6.x和7.x 不在支持插件模式安装，需要作为一个单独的服务运行。</li>
+<li>Elasticsearch 2.x 版本，可以直接安装为插件 <code>sudo elasticsearch/bin/plugin install mobz/elasticsearch-head</code></li>
+<li>for Elasticsearch 1.x 版本，可以直接安装为插件 <code>sudo elasticsearch/bin/plugin -install mobz/elasticsearch-head/1.x</code></li>
+<li>for Elasticsearch 0.x 版本，可以直接安装为插件 <code>sudo elasticsearch/bin/plugin -install mobz/elasticsearch-head/0.9</code></li>
+<li>打开 <a target="_blank" rel="noopener" href="http://localhost:9200/_plugin/head/">http://localhost:9200/_plugin/head/</a>  即可使用</li>
+</ul>
+<p>这将自动从github下载合适版本的elasticsearch-head并将其作为插件运行在elasticsearch集群中。 在这种模式下，elasticsearch-head自动连接到运行它的节点</p>
+<h3 id="4-2-作为独立服务运行"><a href="#4-2-作为独立服务运行" class="headerlink" title="4.2 作为独立服务运行"></a>4.2 作为独立服务运行</h3><ul>
+<li><code>git clone git://github.com/mobz/elasticsearch-head.git</code></li>
+<li><code>cd elasticsearch-head</code></li>
+<li><code>npm install</code></li>
+<li><code>npm run start</code></li>
+<li>open <a target="_blank" rel="noopener" href="http://localhost:9100/">http://localhost:9100/</a></li>
+</ul>
+<p>这将在端口9100启动一个本地Web服务器，该端口提供elasticsearch服务</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/22/es%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" data-id="ckfe2g1ta00001cv0gi9s9uze" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/22/hello-world/" class="article-date">
+  <time datetime="2020-09-22T14:30:29.999Z" itemprop="datePublished">2020-09-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/22/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/22/hello-world/" data-id="ckfe2ain60000e8v0g1v3ev3i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/22/es%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">es 集群搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
